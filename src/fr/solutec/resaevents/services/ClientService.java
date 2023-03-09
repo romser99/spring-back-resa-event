@@ -46,8 +46,7 @@ public class ClientService {
 
     public Client read(Client nom) {
         List<Client> clients = this.list();
-        Client client;
-        client = this.filter(clients, nom);
+        Client client = this.filter(clients, nom);
         return client;
     }
 

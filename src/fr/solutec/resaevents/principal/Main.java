@@ -1,20 +1,79 @@
 package fr.solutec.resaevents.principal;
 
-import fr.solutec.resaevents.entites.Role;
-import fr.solutec.resaevents.entites.Type;
-import fr.solutec.resaevents.services.RoleService;
-import fr.solutec.resaevents.services.TypeService;
+import fr.solutec.resaevents.dao.AdresseDAO;
+import fr.solutec.resaevents.entites.Adresse;
+import fr.solutec.resaevents.services.AdresseService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static fr.solutec.resaevents.enums.RoleEnum.*;
+public class Main {
 
-// EXEMPLE ROLES
+    public static void main(String[] args) throws IOException, SQLException {
 
- public class Main {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Veuillez taper 1 pour rentrer une adresse ou 2 pour voir la liste des adresses");
+        String reponse = reader.readLine();
+
+        AdresseService adresseService1 = new AdresseService();
+        List<Adresse> alladresses = adresseService1.read();
+
+        if (reponse.equals("2")) {
+
+            for (Adresse adres : alladresses) {
+                System.out.println(adres.getNumero() + " " + adres.getRue() + " " + adres.getCodePostal() + " " + adres.getVille() + " " + adres.getRegion() + " " + adres.getPays());
+            }
+        }
+
+        if (reponse.equals("1")) {
+            for (int i = 0; i < 1; i++) {
+                // Lire les saisies de l'utilisateur
+
+                Adresse adresse = new Adresse();
+
+                System.out.println("Veuillez saisir votre code postal");
+                String codePostal = reader.readLine();
+                int codePostAsInteger = Integer.parseInt(codePostal);
+                adresse.setCodePostal(codePostAsInteger);
+
+                System.out.println("Veuillez saisir votre ville");
+                String ville = reader.readLine();
+                adresse.setVille(ville);
+
+                System.out.println("Veuillez saisir votre rue");
+                String rue = reader.readLine();
+                adresse.setRue(rue);
+
+                System.out.println("Veuillez saisir votre numero de rue");
+                String numero = reader.readLine();
+                int numeroAsInt = Integer.parseInt(numero);
+                adresse.setNumero(numeroAsInt);
+
+                System.out.println("Veuillez saisir votre region");
+                String region = reader.readLine();
+                adresse.setRegion(region);
+
+                System.out.println("Veuillez saisir votre pays");
+                String pays = reader.readLine();
+                adresse.setPays(pays);
+
+
+                // et créer une adresse
+                AdresseService adresseService = new AdresseService();
+                adresseService.create(adresse);
+
+            }
+
+
+
+// ROLE
+
     /* public static void main(String[] args) {
         Role role = new Role();
         role.setLibelle("ADMIN");
@@ -54,9 +113,9 @@ import static fr.solutec.resaevents.enums.RoleEnum.*;
     System.out.println("Le role " + role.getLibelle() + " a pour id " + role.getId());
         }*/
 
-        // afficher
+            // afficher
 
-     //  System.out.println("le role cree " + roleCree.getLibelle() + " a pour id " + roleCree.getId());
+            //  System.out.println("le role cree " + roleCree.getLibelle() + " a pour id " + roleCree.getId());
 
        /* Role role = roleService.read(GESTIONNAIRE);
        // afficher role et id dans console
@@ -70,14 +129,7 @@ import static fr.solutec.resaevents.enums.RoleEnum.*;
 
     }
     */
-    public static void main(String[] args) {
-        
-
-
-
-
-
-
+        }
     }
 }
 

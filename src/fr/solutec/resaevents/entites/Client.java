@@ -3,6 +3,8 @@ package fr.solutec.resaevents.entites;
 public class Client extends Personne {
     private int id;
 
+    public Client() {}
+
     public Client(int id) {
         this.id = id;
     }
