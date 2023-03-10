@@ -2,19 +2,25 @@ package fr.solutec.resaevents.principal;
 
 import fr.solutec.resaevents.dao.AdresseDAO;
 import fr.solutec.resaevents.entites.Adresse;
+import fr.solutec.resaevents.entites.Client;
+import fr.solutec.resaevents.entites.Lieu;
 import fr.solutec.resaevents.services.AdresseService;
+import fr.solutec.resaevents.services.ClientService;
+import fr.solutec.resaevents.services.LieuService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, SQLException {
+    /// ADRESSE ///
+
+    /* public static void main(String[] args) throws IOException, SQLException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -68,7 +74,122 @@ public class Main {
                 AdresseService adresseService = new AdresseService();
                 adresseService.create(adresse);
 
+            } */
+
+    /// LIEU ///
+    public static void main(String[] args) throws IOException, SQLException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Veuillez taper 1 pour rentrer un lieu, 2 pour voir la liste des lieu ou 3 pour mettre à jour un lieu");
+        String reponse = reader.readLine();
+
+
+        if (reponse.equals("2")) {
+
+            System.out.println("Veuillez saisir l'id du lieu");
+            String lieuid = reader.readLine();
+            int lieuIdAsInt = Integer.parseInt(lieuid);
+
+            LieuService lieuService = new LieuService();
+            List<Lieu> lieux = lieuService.read(lieuIdAsInt);
+
+            for (Lieu lieu : lieux) {
+
+                System.out.println("Le lieu avec l'ID " + lieu.getId() + " se nomme " + lieu.getNom() + " et se trouve à l'adresse "
+                        + lieu.getAdresse().getId() + " " + lieu.getAdresse().getNumero() + " " + lieu.getAdresse().getRue() + " " + lieu.getAdresse().getCodePostal()
+                        + " " + lieu.getAdresse().getVille() + " " + lieu.getAdresse().getRegion() + " " + lieu.getAdresse().getPays());
             }
+        }
+
+        if (reponse.equals("4")) {
+
+            LieuService lieuService = new LieuService();
+            List<Lieu> lieux = lieuService.readlieu();
+
+            for (Lieu lieu : lieux) {
+
+                System.out.println("Le lieu avec l'ID " + lieu.getId() + " se nomme " + lieu.getNom());
+            }
+        }
+
+        if (reponse.equals("1")) {
+            for (int i = 0; i < 1; i++) {
+                // Lire les saisies de l'utilisateur
+
+                Lieu lieu = new Lieu();
+
+                System.out.println("Veuillez saisir le nom du lieu");
+                String lieusaisi = reader.readLine();
+                lieu.setNom(lieusaisi);
+
+
+                // créer un lieu
+                LieuService lieuService = new LieuService();
+                lieuService.create(lieu);
+            }
+
+        }
+
+        // update
+        if (reponse.equals("3")) {
+            LieuService lieuService = new LieuService();
+
+            System.out.println("Veuillez saisir l'id du lieu");
+            String lieuupdate = reader.readLine();
+            int lieuIdAsInt = Integer.parseInt(lieuupdate);
+
+            System.out.println("Veuillez saisir l'id de l'adresse");
+            String adresseupdate = reader.readLine();
+            int adresseIdAsInt = Integer.parseInt(adresseupdate);
+
+            LieuService lieuService1 = new LieuService();
+            lieuService.update(lieuIdAsInt, adresseIdAsInt);
+
+        }
+    }
+}
+
+
+
+
+/*    public static void main(String[] args){
+
+                public static void main (String[]args) throws IOException {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+                    // afficher l'instruction
+                    System.out.println("Veuillez saisir votre nom");
+                    String nom = reader.readLine();
+                    System.out.println("Veuillez saisir votre prenom");
+                    String prenom = reader.readLine();
+                    System.out.println("Veuillez saisir votre mot de passe");
+                    String mdp = reader.readLine();
+                    System.out.println("Veuillez saisir votre mail");
+                    String mail = reader.readLine();
+                    System.out.println("Veuillez saisir votre numero de telephone");
+                    String telephone = reader.readLine();
+
+                    // creer le client
+                    ClientService clientService = new ClientService();
+                    Client client = new Client();
+                    client.setNom(nom);
+                    client.setNom(prenom);
+                    client.setNom(mdp);
+                    client.setNom(mail);
+                    client.setNom(telephone);
+                    Client clientCree = clientService.create(client);
+
+            /* System.out.println("Liste de clients");
+            ClientService clientService = new ClientService();
+            List<Client> clients = clientService.list();
+            for (Client client : clients) {
+            System.out.println("Le client " + client.getNom() + " a pour id " + client.getId());
+            } */
+
+            //afficher
+
+            //  System.out.println("le client cree " + clientCree.getNom() + " a pour id " + clientCree.getId());
+
 
 
 
@@ -129,9 +250,7 @@ public class Main {
 
     }
     */
-        }
-    }
-}
+
 
 
 //public class Main {

@@ -2,7 +2,6 @@ package fr.solutec.resaevents.entites;
 
 public class Evenement {
         private int id;
-        private boolean active;
         private String nom;
         private String description;
         private Type type;
@@ -12,9 +11,8 @@ public class Evenement {
         public Evenement() {
         }
 
-        public Evenement(int id, boolean active, String nom, String description, Type type) {
+        public Evenement(int id, String nom, String description, Type type) {
                 this.id = id;
-                this.active = active;
                 this.nom = nom;
                 this.description = description;
                 this.type = type;

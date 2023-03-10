@@ -1,22 +1,19 @@
 package fr.solutec.resaevents.entites;
 
-public class Lieu extends Adresse {
+public class Lieu {
     int id;
 
-    String nom;
+    private String nom;
+
+    private Adresse adresse;
 
     public Lieu() {
     }
 
-    public Lieu(int id, String nom) {
+    public Lieu(int id, String nom, Adresse adresse) {
         this.id = id;
         this.nom = nom;
-    }
-
-    public Lieu(int id, int numero, String rue, int codePostal, String ville, String region, String pays, int id1, String nom) {
-        super(id, numero, rue, codePostal, ville, region, pays);
-        this.id = id1;
-        this.nom = nom;
+        this.adresse = adresse;
     }
 
     public int getId() {
@@ -33,5 +30,13 @@ public class Lieu extends Adresse {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 }

@@ -13,7 +13,14 @@ public class LieuService {
         this.lieuDAO.create(lieu);
     }
 
-    public List<Lieu> read() {
-        return this.lieuDAO.read();
+    public List<Lieu> read(int lieuid) {
+        return this.lieuDAO.read(lieuid);
+    }
+
+    public List<Lieu> readlieu() {
+        return this.lieuDAO.readlieu();
+    }
+
+    public void update(int lieuid, int adresseid) { this.lieuDAO.update(lieuid, adresseid);
     }
 }
