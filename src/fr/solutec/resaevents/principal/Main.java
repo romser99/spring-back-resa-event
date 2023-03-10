@@ -169,7 +169,7 @@ public class Main {
 
                 System.out.println("Veuillez saisir la description de l'evenement");
                 String description = reader.readLine();
-                evenement.setNom(description);
+                evenement.setDescription(description);
 
 
                 // créer un lieu
@@ -221,9 +221,10 @@ public class Main {
             int idInt = Integer.parseInt(id);
 
             EvenementService evenementService = new EvenementService();
-            List<Evenement> evenement1 = evenementService.readevt(idInt);
-            for (Evenement evenement : evenement1) {
+            List<Evenement> evenements = evenementService.readevt(idInt);
+            for (Evenement evenement : evenements) {
                 System.out.println("L'evenement" + evenement.getNom() +" a l'id " + evenement.getId() +" et la description " + evenement.getDescription());
+
             }
         }
     }

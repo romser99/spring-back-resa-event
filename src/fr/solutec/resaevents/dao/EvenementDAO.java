@@ -53,7 +53,7 @@ public class EvenementDAO {
             String CONNECTION_URL = "jdbc:mysql://localhost/resaevents?user=root";
             connection = DriverManager.getConnection(CONNECTION_URL);
 
-            String QUERY = "INSERT INTO EVENEMENT(NOM, DECSRIPTION) VALUES (?, ?)";
+            String QUERY = "INSERT INTO EVENEMENT(NOM, DESCRIPTION) VALUES (?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setString(1, evenement.getNom());
             preparedStatement.setString(2, evenement.getDescription());
