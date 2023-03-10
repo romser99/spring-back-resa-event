@@ -3,9 +3,11 @@ package fr.solutec.resaevents.principal;
 import fr.solutec.resaevents.dao.AdresseDAO;
 import fr.solutec.resaevents.entites.Adresse;
 import fr.solutec.resaevents.entites.Client;
+import fr.solutec.resaevents.entites.Evenement;
 import fr.solutec.resaevents.entites.Lieu;
 import fr.solutec.resaevents.services.AdresseService;
 import fr.solutec.resaevents.services.ClientService;
+import fr.solutec.resaevents.services.EvenementService;
 import fr.solutec.resaevents.services.LieuService;
 
 import java.io.BufferedReader;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -77,7 +80,7 @@ public class Main {
             } */
 
     /// LIEU ///
-    public static void main(String[] args) throws IOException, SQLException {
+   /* public static void main(String[] args) throws IOException, SQLException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Veuillez taper 1 pour rentrer un lieu, 2 pour voir la liste des lieu ou 3 pour mettre à jour un lieu");
@@ -146,7 +149,91 @@ public class Main {
             lieuService.update(lieuIdAsInt, adresseIdAsInt);
 
         }
+    } */
+
+    public static void main(String[] args) throws IOException, SQLException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Veuillez taper 1 pour rentrer un evenement, 2 pour mettre à jour un evenement, 3 pour voir la liste des evenements avec leurs types, 4 pour voir la liste des evenements seuls, 5 pour voir la liste des types");
+        String reponse = reader.readLine();
+
+        if (reponse.equals("1")) {
+            for (int i = 0; i < 1; i++) {
+                // Lire les saisies de l'utilisateur
+
+                Evenement evenement = new Evenement();
+
+                System.out.println("Veuillez saisir le nom de l'evenement");
+                String nom = reader.readLine();
+                evenement.setNom(nom);
+
+                System.out.println("Veuillez saisir la description de l'evenement");
+                String description = reader.readLine();
+                evenement.setNom(description);
+
+
+                // créer un lieu
+
+                EvenementService evenementService = new EvenementService();
+                evenementService.create(evenement);
+            }
+
+        }
+
+        // update
+        if (reponse.equals("2")) {
+            EvenementService evenementService = new EvenementService();
+
+            System.out.println("Veuillez saisir l'id de l'evnement");
+            String idev = reader.readLine();
+            int idevint = Integer.parseInt(idev);
+
+            System.out.println("Veuillez saisir l'id du type");
+            String idtype = reader.readLine();
+            int idtypeint = Integer.parseInt(idtype);
+
+            EvenementService evenementService1 = new EvenementService();
+            evenementService1.update(idevint, idtypeint);
+
+        }
+
+        if (reponse.equals("3")) {
+
+            System.out.println("Veuillez saisir l'id de l'evenement");
+            String id = reader.readLine();
+            int idInt = Integer.parseInt(id);
+
+            EvenementService evenementService = new EvenementService();
+            List<Evenement> evenements = evenementService.read(idInt);
+
+            for (Evenement evenement : evenements) {
+
+                System.out.println("L'evenement " + evenement.getNom() + " a pour id " + evenement.getId() +
+                        ". Il est de type " + evenement.getType() + " et a pour description " + evenement.getDescription());
+
+            }
+        }
+
+        if (reponse.equals("4")) {
+
+            System.out.println("Veuillez saisir l'id de l'evenement");
+            String id = reader.readLine();
+            int idInt = Integer.parseInt(id);
+
+            EvenementService evenementService = new EvenementService();
+            List<Evenement> evenement1 = evenementService.readevt(idInt);
+            for (Evenement evenement : evenement1) {
+                System.out.println("L'evenement" + evenement.getNom() +" a l'id " + evenement.getId() +" et la description " + evenement.getDescription());
+            }
+        }
     }
+
+
+
+
+
+
+
 }
 
 

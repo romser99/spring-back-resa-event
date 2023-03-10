@@ -5,6 +5,7 @@ public class Evenement {
         private String nom;
         private String description;
         private Type type;
+
         //private Salle salle;
 
 
