@@ -5,7 +5,7 @@ import fr.solutec.resaevent.entites.Equipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipeService {
+public class EquipeService {/*
     public Equipe create(Equipe equipe) {
         int id =(int)(Math.random() * 50 + 1);
         equipe.setId(id);
@@ -37,5 +37,5 @@ public class EquipeService {
 
     public void delete(int id){
 
-    }
+    }*/
 }
