@@ -2,14 +2,21 @@ package fr.solutec.re.dao;
 
 import fr.solutec.re.entites.Adresse;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Component
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
+
+@Repository
 public class AdresseDAO {
     private JdbcTemplate jdbcTemplate;
 
@@ -17,14 +24,22 @@ public class AdresseDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void create (Adresse adresse){
-        jdbcTemplate.update(
-                "INSERT INTO ADRESSE(numero, rue) VALUES (?,?,?,?)",
-                adresse.getNumero(),
-                adresse.getRue(),
-                adresse.getCodePostal(),
-                adresse.getVille()
-        );
+    public Adresse create (Adresse adresse){
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+
+        jdbcTemplate.update( connection -> {
+                    PreparedStatement ps = connection.prepareStatement("INSERT INTO ADRESSE (numero, rue, code_postal, ville) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS
+                    );
+                    ps.setInt(1, adresse.getNumero());
+                    ps.setString(2, adresse.getRue());
+                    ps.setInt(3, adresse.getCodePostal());
+                    ps.setString(4, adresse.getVille());
+                    return ps;
+                    }, keyHolder);
+        int id = keyHolder.getKey().intValue();
+        adresse.setId(id);
+        return adresse ;
 
     }
 
@@ -45,10 +60,9 @@ public class AdresseDAO {
     }
 
     public void delete(int id){
-        String Strid = Integer.toString(id) ;
         jdbcTemplate.update(
                 "DELETE FROM ADRESSE WHERE id = ?",
-                Strid);
+                id);
 
     }
 }

@@ -16,9 +16,9 @@ public class AdresseService {
         this.adresseDAO = adresseDAO;
     }
 
-    public void create(Adresse adresse){
+    public Adresse create(Adresse adresse){
         System.out.println("[service]creation d'une nouvelle adresse");
-        this.adresseDAO.create(adresse);
+        return this.adresseDAO.create(adresse);
 
     }
 

@@ -3,14 +3,15 @@ package fr.solutec.re.dao;
 import fr.solutec.re.entites.Adresse;
 import fr.solutec.re.entites.Lieu;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Component
+@Repository
 public class LieuDAO {
 
     private JdbcTemplate jdbcTemplate;
@@ -21,13 +22,21 @@ public class LieuDAO {
 
     public void create (Lieu lieu){
         jdbcTemplate.update(
-                "INSERT INTO LIEU(nom) VALUES (?)",
-                lieu.getNom()
+                "INSERT INTO LIEU(nom,adresse_id) VALUES (?,?)",
+                lieu.getNom(),
+                lieu.getAdresse().getId()
         );
 
     }
 
-    public Set<Lieu> readALL() {
+    public Lieu read(int id) {
+        String sql = "SELECT * FROM LIEU WHERE id=?";
+        Lieu lieu = jdbcTemplate.queryForObject(sql,Lieu.class, new Object[] { id });
+        return lieu ;
+
+    }
+
+    public Set<Lieu> search(Map<String, String> params) {
         List<Lieu> lieux = new ArrayList<>();
         String QUERY = "SELECT * FROM LIEU l JOIN ADRESSE a ON l.adresse_id = a.id";
         List<Map<String,Object>> items = jdbcTemplate.queryForList(QUERY);
@@ -46,5 +55,11 @@ public class LieuDAO {
             lieux.add(lieu);
         }
         return Set.copyOf(lieux);
+    }
+    public void delete(int id){
+        jdbcTemplate.update(
+                "DELETE FROM LIEU WHERE id = ?",
+                id);
+
     }
 }

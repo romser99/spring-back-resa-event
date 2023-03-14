@@ -34,8 +34,8 @@ public class AdresseController {
 
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void delete (@RequestBody int id){
+    @DeleteMapping(path = "{id}")
+    public void delete (@PathVariable int id){
         this.adresseService.delete(id);
     }
 }

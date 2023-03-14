@@ -1,16 +1,17 @@
 package fr.solutec.re.dao;
 
-import fr.solutec.re.entites.Adresse;
+
 import fr.solutec.re.entites.Gestionnaire;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Component
+@Repository
 public class GestionnaireDAO {
 
     private JdbcTemplate jdbcTemplate;
