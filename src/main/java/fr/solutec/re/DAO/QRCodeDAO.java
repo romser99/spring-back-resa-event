@@ -2,14 +2,14 @@ package fr.solutec.re.DAO;
 
 import fr.solutec.re.entites.QRCode;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Component
+@Repository
 public class QRCodeDAO {
     private JdbcTemplate jdbcTemplate;
     public QRCodeDAO(JdbcTemplate jdbcTemplate) {

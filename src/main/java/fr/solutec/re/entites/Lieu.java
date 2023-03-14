@@ -2,7 +2,6 @@ package fr.solutec.re.entites;
 
 public class Lieu {
     private int id;
-
     private String nom;
     private Adresse adresse;
 
