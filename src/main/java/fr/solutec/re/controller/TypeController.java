@@ -6,6 +6,7 @@ import fr.solutec.re.entites.Evenement;
 import fr.solutec.re.entites.Type;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -19,16 +20,15 @@ public class TypeController {
         this.typeService = typeService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    @PostMapping
     public void create(@RequestBody Type type) {
         System.out.println("[controller] Création d'un nouveau type");
         this.typeService.create(type);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Set<Type> readAll() {
+    @GetMapping
+    public Set<Type> readAll() {
         System.out.println("[controller] Lecture des types");
-
         return this.typeService.readAll();
     }
 

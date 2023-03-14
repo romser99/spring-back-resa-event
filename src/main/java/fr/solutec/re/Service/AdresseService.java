@@ -18,9 +18,9 @@ public class AdresseService {
         this.adresseDAO = adresseDAO;
     }
 
-    public void create(Adresse adresse) {
+    public Adresse create(Adresse adresse) {
         System.out.println("[service]Création d'une nouvelle adresse");
-        this.adresseDAO.create(adresse);
+        return this.adresseDAO.create(adresse);
     }
 
     public Set<Adresse> readAll() {

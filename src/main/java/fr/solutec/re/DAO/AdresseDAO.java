@@ -2,8 +2,12 @@ package fr.solutec.re.DAO;
 
 import fr.solutec.re.entites.Adresse;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,14 +21,18 @@ public class AdresseDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void create (Adresse adresse) {
-         System.out.println("[DAO]Création d'une nouvelle adresse");
-        jdbcTemplate.update(
-                "INSERT INTO ADRESSE (numero, rue) VALUES (?, ?)",
-                adresse.getNumero(),
-                adresse.getRue()
-        );
-     }
+    public Adresse create(Adresse adresse) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        System.out.println("Creation d'une nouvelle adresse");
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO ADRESSE (numero, rue) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, adresse.getNumero());
+            ps.setString(2, adresse.getRue());
+            return ps;},keyHolder);
+        int id = keyHolder.getKey().intValue();
+        adresse.setId(id);
+        return adresse;
+    }
 
      public Set<Adresse> readAll() {
         List<Adresse> adresses = new ArrayList<>();

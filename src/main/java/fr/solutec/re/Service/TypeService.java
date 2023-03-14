@@ -6,6 +6,7 @@ import fr.solutec.re.entites.Evenement;
 import fr.solutec.re.entites.Type;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -20,7 +21,6 @@ public class TypeService {
         System.out.println("[service]Création d'un nouveau type");
         this.typeDAO.create(type);
     }
-
     public Set<Type> readAll() {
         System.out.println("[service]Lecture des types");
 
