@@ -1,9 +1,13 @@
 package fr.solutec.re.entites;
 
+import java.util.Date;
+
 public class Evenement {
     private int id;
     private String nom;
     private String description;
+
+    private Date date;
 
     private Type type;
 
@@ -11,10 +15,11 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(int id, String nom, String description, Type type) {
+    public Evenement(int id, String nom, String description, Date date, Type type) {
         this.id = id;
         this.nom = nom;
         this.description = description;
+        this.date = date;
         this.type = type;
     }
 
@@ -40,6 +45,14 @@ public class Evenement {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Type getType() {

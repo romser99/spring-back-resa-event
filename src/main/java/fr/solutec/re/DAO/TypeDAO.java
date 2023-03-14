@@ -14,10 +14,14 @@ import java.util.Set;
 public class TypeDAO {
     private JdbcTemplate jdbcTemplate;
 
+    public TypeDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public void create(Type type) {
         System.out.println("[DAO]Création d'un nouveau type");
         jdbcTemplate.update(
-                "INSERT INTO TYPE (nom) VALUES (?, ?)",
+                "INSERT INTO TYPE (nom) VALUES (?)",
                 type.getNom()
         );
 

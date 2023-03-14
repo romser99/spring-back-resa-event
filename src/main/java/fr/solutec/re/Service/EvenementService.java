@@ -20,6 +20,7 @@ public class EvenementService {
         this.evenementDAO.create(evenement);
     }
 
+
     public Set<Evenement> readAll() {
         System.out.println("[service]Lecture des évènements");
 
