@@ -1,6 +1,7 @@
 package fr.solutec.re.dao;
 
 
+import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Gestionnaire;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -31,11 +32,29 @@ public class GestionnaireDAO {
         );
 
     }
+    public Gestionnaire read(int id) {
+        String sql = "SELECT * FROM GESTIONNAIRE WHERE id=?";
+        Gestionnaire gestionnaire = jdbcTemplate.queryForObject(sql,Gestionnaire.class, new Object[] { id });
+        return gestionnaire ;
 
-    public Set<Gestionnaire> readALL() {
+    }
+
+    public Set<Gestionnaire> search(Map<String, String> params) {
         List<Gestionnaire> gestionnaires = new ArrayList<>();
-        String QUERY = "SELECT * FROM GESTIONNAIRE";
-        List<Map<String,Object>> items = jdbcTemplate.queryForList(QUERY);
+        String query = "SELECT * FROM GESTIONNAIRE";
+        if (!params.isEmpty()) {
+            List<String> keys = List.copyOf(params.keySet());
+            for (int i = 0; i < keys.size(); i++) {
+
+                if (i == 0) {
+                    query += " WHERE " + keys.get(i) + " LIKE '%" + params.get(keys.get(i))+"%'";
+                }
+                else {
+                    query += " AND " + keys.get(i) + " LIKE '%" + params.get(keys.get(i))+"%'" ;
+                }
+            }
+        }
+        List<Map<String,Object>> items = jdbcTemplate.queryForList(query);
         for (Map<String, Object> item: items) {
             Gestionnaire gestionnaire = new Gestionnaire();
             gestionnaire.setId((int)item.get("id"));
@@ -47,5 +66,12 @@ public class GestionnaireDAO {
             gestionnaires.add(gestionnaire);
         }
         return Set.copyOf(gestionnaires);
+    }
+
+    public void delete(int id){
+        jdbcTemplate.update(
+                "DELETE FROM GESTIONNAIRE WHERE id = ?",
+                id);
+
     }
 }

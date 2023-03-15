@@ -1,8 +1,11 @@
 package fr.solutec.re.controller;
+import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Gestionnaire;
 import fr.solutec.re.services.GestionnaireService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -18,14 +21,36 @@ public class GestionnaireController {
 
 
 
-    @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void create(@RequestBody Gestionnaire gestionnaire){
         this.gestionnaireService.create(gestionnaire);
 
     }
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Set<Gestionnaire> readALL(){
-        return this.gestionnaireService.readALL();
 
+    @GetMapping(path = "{id}")
+    public Gestionnaire read (@PathVariable int id) {
+        Gestionnaire gestionnaire = this.gestionnaireService.read(id) ;
+        return gestionnaire ;
+    }
+
+    @GetMapping
+    public @ResponseBody Set<Gestionnaire> search(@RequestParam (required = false) String id,
+                                                  @RequestParam(required = false) String nom,
+                                                  @RequestParam(required = false) String prenom,
+                                                  @RequestParam(required = false) String mail,
+                                                  @RequestParam(required = false) String telephone){
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("nom", nom);
+        params.put("prenom", prenom);
+        params.put("mail", mail);
+        params.put("telephone", telephone);
+        return this.gestionnaireService.search(params);
+
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void delete (@PathVariable int id){
+        this.gestionnaireService.delete(id);
     }
 }

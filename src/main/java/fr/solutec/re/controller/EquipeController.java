@@ -1,9 +1,13 @@
 package fr.solutec.re.controller;
 
+import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Equipe;
+import fr.solutec.re.enums.RoleEnum;
 import fr.solutec.re.services.EquipeService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -19,15 +23,45 @@ public class EquipeController {
 
 
 
-    @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void create(@RequestBody Equipe equipe){
         this.equipeService.create(equipe);
 
     }
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Set<Equipe> readALL(){
-        return this.equipeService.readALL();
 
+    @GetMapping(path = "{id}")
+    public Equipe read (@PathVariable int id) {
+        Equipe equipe = this.equipeService.read(id) ;
+        return equipe ;
+    }
+
+
+    @GetMapping
+    public @ResponseBody Set<Equipe> search(@RequestParam (required = false) String id,
+                                            @RequestParam(required = false) String nom,
+                                            @RequestParam(required = false) String prenom,
+                                            @RequestParam(required = false) String mail,
+                                            @RequestParam(required = false) String telephone,
+                                            @RequestParam(required = false) String role){
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("nom", nom);
+        params.put("prenom", prenom);
+        params.put("mail", mail);
+        params.put("telephone", telephone);
+        params.put("role", role);
+
+        return this.equipeService.search(params);
+
+    }
+    @DeleteMapping(path = "{id}")
+    public void delete (@PathVariable int id){
+        this.equipeService.delete(id);
+    }
+
+    @PatchMapping(path ="{ideq}/role" )
+    public void update(@PathVariable int ideq, @RequestParam (required = false) RoleEnum libelle){
+        this.equipeService.update(ideq, libelle) ;
     }
 
 

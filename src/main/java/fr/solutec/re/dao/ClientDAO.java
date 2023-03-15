@@ -1,6 +1,7 @@
 package fr.solutec.re.dao;
 
 import fr.solutec.re.entites.Client;
+import fr.solutec.re.entites.Lieu;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+
 
 @Repository
 public class ClientDAO {
@@ -32,10 +35,30 @@ public class ClientDAO {
 
     }
 
-    public Set<Client> readALL() {
+    public Client read(int id) {
+        String sql = "SELECT * FROM CLIENT WHERE id=?";
+        Client client = jdbcTemplate.queryForObject(sql,Client.class, new Object[] { id });
+        return client ;
+
+    }
+
+
+    public Set<Client> search(Map<String, String> params) {
         List<Client> clients = new ArrayList<>();
-        String QUERY = "SELECT * FROM CLIENT";
-        List<Map<String,Object>> items = jdbcTemplate.queryForList(QUERY);
+        String query = "SELECT * FROM CLIENT";
+        if (!params.isEmpty()) {
+            List<String> keys = List.copyOf(params.keySet());
+            for (int i = 0; i < keys.size(); i++) {
+
+                if (i == 0) {
+                    query += " WHERE " + keys.get(i) + " LIKE '%" + params.get(keys.get(i))+"%'";
+                }
+                else {
+                    query += " AND " + keys.get(i) + " LIKE '%" + params.get(keys.get(i))+"%'" ;
+                }
+            }
+        }
+        List<Map<String,Object>> items = jdbcTemplate.queryForList(query);
         for (Map<String, Object> item: items) {
             Client client = new Client();
             client.setId((int)item.get("id"));
@@ -47,5 +70,12 @@ public class ClientDAO {
             clients.add(client);
         }
         return Set.copyOf(clients);
+    }
+
+    public void delete(int id){
+        jdbcTemplate.update(
+                "DELETE FROM ClIENT WHERE id = ?",
+                id);
+
     }
 }
