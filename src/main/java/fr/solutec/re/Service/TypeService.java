@@ -18,13 +18,18 @@ public class TypeService {
     }
 
     public void create(Type type) {
-        System.out.println("[service]Création d'un nouveau type");
+        System.out.println("[service] Création d'un nouveau type");
         this.typeDAO.create(type);
     }
     public Set<Type> readAll() {
-        System.out.println("[service]Lecture des types");
+        System.out.println("[service] Lecture des types");
 
         return this.typeDAO.readAll();
+    }
+
+    public void delete(String nomtype) {
+        System.out.println("[Service] Suppression d'un type");
+        typeDAO.delete(nomtype);
     }
 
 

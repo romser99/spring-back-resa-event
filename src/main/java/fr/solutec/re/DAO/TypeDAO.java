@@ -23,9 +23,8 @@ public class TypeDAO {
     }
 
     public Type create(Type type) {
-
+        System.out.println("[DAO] Création d'un type");
         KeyHolder keyHolder = new GeneratedKeyHolder();
-
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO TYPE ()", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, type.getNom());
@@ -36,7 +35,7 @@ public class TypeDAO {
         }
 
     public Set<Type> readAll() {
-        System.out.println("[DAO]Lecture des types");
+        System.out.println("[DAO] Lecture des types");
         List<Type> types = new ArrayList<>();
         String QUERY = "SELECT * FROM EVENEMENT";
         List<Map<String, Object>> items = jdbcTemplate.queryForList(QUERY);
@@ -49,8 +48,9 @@ public class TypeDAO {
         return Set.copyOf(types);
     }
 
-    public Set<Type> search(Map<String, String> params) {
-        return null;
+    public void delete(String nomtype){
+        System.out.println("[DAO] Suppression d'un type");
+        jdbcTemplate.update("DELETE FROM TYPE WHERE nom = ?", nomtype);
     }
 
 }

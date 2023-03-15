@@ -32,4 +32,10 @@ public class TypeController {
         return this.typeService.readAll();
     }
 
+    @DeleteMapping
+    public void delete(String nomtype) {
+        System.out.println("[controller] Suppression d'un type");
+        typeService.delete(nomtype);
+    }
+
 }
