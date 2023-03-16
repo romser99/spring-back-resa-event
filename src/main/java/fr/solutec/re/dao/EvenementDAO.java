@@ -1,9 +1,7 @@
-package fr.solutec.re.DAO;
+package fr.solutec.re.dao;
 
-import fr.solutec.re.entites.Adresse;
 import fr.solutec.re.entites.Evenement;
 import fr.solutec.re.entites.Type;
-import org.springframework.data.relational.core.sql.Not;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -131,15 +129,15 @@ public class EvenementDAO {
 
     public Set<Evenement> search(Map<String, String> params) {
         List<Evenement> evenements = new ArrayList<>();
-        String QUERY = "SELECT * FROM EVENEMENT";
+        String QUERY = "SELECT e.id AS e_id, e.nom AS e_nom, t.nom AS t_nom FROM EVENEMENT e JOIN TYPE t ON type_id = t.id";
         if (!params.isEmpty()) {
             List<String> keys = List.copyOf(params.keySet());
             for (int i = 0; i < keys.size(); i++) {
                 if (i==0) {
-                    QUERY += "WHERE" + keys.get(i) + "Like '%" + params.get(keys.get(i)) + "'%";
+                    QUERY += " WHERE " + keys.get(i) + "Like '%" + params.get(keys.get(i)) + "%'";
                 }
                 else {
-                    QUERY += "AND" + keys.get(i) + "Like '%" + params.get(keys.get(i)) + "'%";
+                    QUERY += " AND " + keys.get(i) + " Like '%" + params.get(keys.get(i)) + "%'";
                 }
             }
         }
@@ -149,7 +147,7 @@ public class EvenementDAO {
 
             evenement.setId((int) item.get("e_id"));
             evenement.setNom((String) item.get("e_nom"));
-            evenement.setDescription((String) item.get("description"));
+            evenement.setDescription((String) item.get("t_nom"));
             evenements.add(evenement);
         }
         return Set.copyOf(evenements);
@@ -172,31 +170,24 @@ public class EvenementDAO {
         jdbcTemplate.update("UPDATE EVENEMENT SET type_id = ? WHERE id = ?", idtype, idevt);
     }
 
-
-
-
-
-
     public void update(Map<String, String> params) {
-        String QUERY = "UPDATE EVENEMENT SET ? = ? WHERE ? = ? ";
-        List<String> keys = List.copyOf(params.keySet())
+        String QUERY = "UPDATE EVENEMENT";
+        List<String> keys = List.copyOf(params.keySet());
         for (int i = 0; i < keys.size(); i++) {
-            if (i==0) {
-
-                jdbcTemplate.update(QUERY, );
+            if (i == 0) {
+                QUERY += "SET" + keys.get(i) + " = " + params.get(keys.get(i));
+            }
+            else {
+                QUERY += "AND" + keys.get(i) + " = " + params.get(keys.get(i));
+            }
+        }
+        jdbcTemplate.update(QUERY);
     }
 
 
-
-
-
-
-
-
-
-    public void deleteparid(int idevt) {
-        System.out.println("[DAO] Suppression d'un évènement");
-        jdbcTemplate.update("DELETE FROM EVENEMENT WHERE id = ?", idevt);
+        public void deleteparid ( int idevt){
+            System.out.println("[DAO] Suppression d'un évènement");
+            jdbcTemplate.update("DELETE FROM EVENEMENT WHERE id = ?", idevt);
+        }
     }
 
-}

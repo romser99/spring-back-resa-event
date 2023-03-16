@@ -1,4 +1,4 @@
-package fr.solutec.re.DAO;
+package fr.solutec.re.dao;
 
 import fr.solutec.re.entites.Adresse;
 import org.springframework.jdbc.core.JdbcTemplate;

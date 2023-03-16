@@ -1,12 +1,9 @@
 package fr.solutec.re.controller;
 
-import fr.solutec.re.Service.AdresseService;
+import fr.solutec.re.service.AdresseService;
 import fr.solutec.re.entites.Adresse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

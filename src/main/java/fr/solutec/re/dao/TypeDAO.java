@@ -1,6 +1,5 @@
-package fr.solutec.re.DAO;
+package fr.solutec.re.dao;
 
-import fr.solutec.re.entites.Evenement;
 import fr.solutec.re.entites.Type;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;

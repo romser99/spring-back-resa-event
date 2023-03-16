@@ -1,10 +1,19 @@
 package fr.solutec.re.entites;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "LIEU")
 public class Lieu {
+    @Id
     int id;
 
     String nom;
 
+    @OneToOne
     Adresse adresse;
 
     public Lieu() {

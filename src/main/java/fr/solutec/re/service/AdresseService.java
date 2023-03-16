@@ -1,12 +1,8 @@
-package fr.solutec.re.Service;
+package fr.solutec.re.service;
 
-import fr.solutec.re.DAO.AdresseDAO;
+import fr.solutec.re.dao.AdresseDAO;
 import fr.solutec.re.entites.Adresse;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Set;
 

@@ -1,12 +1,18 @@
 package fr.solutec.re.entites;
 
+import javax.persistence.*;
 import java.util.Date;
 
+
+@Entity
+@Table( name = "evenement")
 public class Evenement {
+    @Id
     private int id;
     private String nom;
     private String description;
 
+    @ManyToOne
     private Type type;
 
     public Evenement() {

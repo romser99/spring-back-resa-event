@@ -1,11 +1,9 @@
-package fr.solutec.re.DAO;
+package fr.solutec.re.dao;
 
 import fr.solutec.re.entites.Lieu;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Map;
 @Repository
 public class LieuDAO {
     private JdbcTemplate jdbcTemplate;

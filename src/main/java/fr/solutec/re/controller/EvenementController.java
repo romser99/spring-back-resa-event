@@ -1,12 +1,12 @@
 package fr.solutec.re.controller;
 
-import fr.solutec.re.Service.EvenementService;
-import fr.solutec.re.entites.Adresse;
+import fr.solutec.re.entites.Type;
+import fr.solutec.re.service.EvenementService;
 import fr.solutec.re.entites.Evenement;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,44 +21,36 @@ public class EvenementController {
         this.evenementService = evenementService;
     }
 
-    @PostMapping (path = "create")
-    public void create(@RequestBody Evenement evenement) {
-        System.out.println("[controller] Création d'un nouvel évènement");
-        this.evenementService.create(evenement);
+    /* ///////////////////////////////////CREATE&UPDATE////////////////////////////////////// */
+    @PostMapping
+    public void create(@RequestBody List<Evenement> events) {
+        this.evenementService.create(events);
     }
 
-    @GetMapping (path = "readall")
-    public @ResponseBody Set<Evenement> readAll() {
-        System.out.println("[controller] Lecture des évènements");
+    /* ///////////////////////////////////READ////////////////////////////////////// */
 
+    @GetMapping (path = "readall")
+    public @ResponseBody Iterable<Evenement> readAll() {
         return this.evenementService.readAll();
     }
 
     @GetMapping
-    public @ResponseBody Set<Evenement> search(@RequestParam(required = false) String nom, @RequestParam(required = false) String description){
+    public @ResponseBody Set<Evenement> search(
+            @RequestParam(required = false) String nom,
+            @RequestParam(required = false) String type){
         Map<String, String> params = new HashMap<>();
         params.put("nom", nom);
-        params.put("description", description);
+        params.put("type", type);
         return this.evenementService.search(params);
     }
 
-    @GetMapping (path = "{nomevt}")
-    public @ResponseBody Set<Evenement> readparnom( String nomevt) {
-        System.out.println("[controller] Lecture des évènements selon le nom");
-        return this.evenementService.readparnom(nomevt);
+    /* //////////////////////////////////DELETE/////////////////////////////////////// */
+    @DeleteMapping
+    public void deleteparid(@RequestParam Set<Integer> id) {
+        evenementService.deleteparid(id);
     }
 
-    @GetMapping (path = "readparid")
-    public @ResponseBody Set<Evenement> readparid(int idevt) {
-        System.out.println("[controller] Lecture des évènements selon l'id");
-        return this.evenementService.readparid(idevt);
-    }
-
-    @GetMapping (path = "readpartype")
-    public @ResponseBody Set<Evenement> readpartype(String typeevt) {
-        System.out.println("[controller] Lecture des évènements selon le type");
-        return this.evenementService.readpartype(typeevt);
-    }
+    /* /////////////////////////////////UPDATE////////////////////////////////////////
 
     @PutMapping (path = "updatenom")
     public @ResponseBody void updatenom(@RequestParam String nomevt, @RequestParam int idevt) {
@@ -76,14 +68,7 @@ public class EvenementController {
     public @ResponseBody void updatetype(String description, int idevt) {
         System.out.println("[controller] Update du type de l'évènement");
         this.evenementService.updatetype(description, idevt);
-    }
-
-
-    @DeleteMapping (path = "delete")
-    public void deleteparid(int idevt) {
-        System.out.println("[controller] Suppression d'un évènement");
-        evenementService.deleteparid(idevt);
-    }
+    } */
 
 
 }

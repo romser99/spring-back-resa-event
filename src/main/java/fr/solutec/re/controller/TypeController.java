@@ -1,13 +1,8 @@
 package fr.solutec.re.controller;
 
-import fr.solutec.re.Service.EvenementService;
-import fr.solutec.re.Service.TypeService;
-import fr.solutec.re.entites.Evenement;
+import fr.solutec.re.service.TypeService;
 import fr.solutec.re.entites.Type;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -27,15 +22,16 @@ public class TypeController {
     }
 
     @GetMapping
-    public Set<Type> readAll() {
+    public Iterable<Type> readAll() {
         System.out.println("[controller] Lecture des types");
         return this.typeService.readAll();
     }
 
-    @DeleteMapping
-    public void delete(String nomtype) {
+    @DeleteMapping (path = "{idtype}")
+    public void delete(@PathVariable int idtype) {
         System.out.println("[controller] Suppression d'un type");
-        typeService.delete(nomtype);
+        typeService.delete(idtype);
     }
+
 
 }
