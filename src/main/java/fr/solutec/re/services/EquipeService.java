@@ -1,33 +1,34 @@
 package fr.solutec.re.services;
 
 import fr.solutec.re.dao.EquipeDAO;
-import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Equipe;
-import fr.solutec.re.entites.Gestionnaire;
+
 import fr.solutec.re.enums.RoleEnum;
+import fr.solutec.re.repository.EquipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class EquipeService {
     private EquipeDAO equipeDAO ;
+    private EquipeRepository equipeRepository;
 
-    public EquipeService(EquipeDAO equipeDAO) {
+    public EquipeService(EquipeDAO equipeDAO, EquipeRepository equipeRepository) {
         this.equipeDAO = equipeDAO;
+        this.equipeRepository = equipeRepository;
     }
 
-    public void create(Equipe equipe){
-
-        this.equipeDAO.create(equipe);
-
+    public void save(Equipe equipe){
+        this.equipeRepository.save(equipe);
     }
 
-    public Equipe read(int id){
-        Equipe equipe = this.equipeDAO.read(id);
-        return equipe;
+    public Equipe findById(int id){
+        Optional<Equipe> optionalequipe = this.equipeRepository.findById(id);
+        return optionalequipe.get();
 
     }
 
@@ -42,8 +43,8 @@ public class EquipeService {
         return this.equipeDAO.search(nparams) ;
     }
 
-    public void delete(int id){
-        this.equipeDAO.delete(id);
+    public void deleteById(int id){
+        this.equipeRepository.deleteById(id);
 
     }
 

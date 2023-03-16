@@ -23,7 +23,7 @@ public class LieuController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void create(@RequestBody Lieu lieu){
-        this.lieuService.create(lieu);
+        this.lieuService.save(lieu);
 
     }
 
@@ -34,11 +34,17 @@ public class LieuController {
     }
 
 
-    @GetMapping
+    /*@GetMapping
     public @ResponseBody Set<Lieu> search(Map<String, String> params){
         return this.lieuService.search(params);
 
+    }*/
+
+    @GetMapping
+    public Iterable<Lieu> findall(){
+        return this.lieuService.findall();
     }
+
 
     @DeleteMapping(path = "{id}")
     public void delete (@PathVariable int id){

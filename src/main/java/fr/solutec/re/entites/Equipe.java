@@ -1,9 +1,15 @@
 package fr.solutec.re.entites;
 
-public class Equipe extends Personne{
+import javax.persistence.*;
 
-        private int id;
-        public Role role ;
+@Entity
+@Table(name = "equipe")
+public class Equipe extends Personne{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @OneToOne
+    public Role role ;
 
     public Equipe () {
     }

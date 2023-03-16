@@ -22,14 +22,14 @@ public class GestionnaireController {
 
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Gestionnaire gestionnaire){
-        this.gestionnaireService.create(gestionnaire);
+    public void save(@RequestBody Gestionnaire gestionnaire){
+        this.gestionnaireService.save(gestionnaire);
 
     }
 
     @GetMapping(path = "{id}")
     public Gestionnaire read (@PathVariable int id) {
-        Gestionnaire gestionnaire = this.gestionnaireService.read(id) ;
+        Gestionnaire gestionnaire = this.gestionnaireService.findById(id) ;
         return gestionnaire ;
     }
 
@@ -50,7 +50,7 @@ public class GestionnaireController {
     }
 
     @DeleteMapping(path = "{id}")
-    public void delete (@PathVariable int id){
-        this.gestionnaireService.delete(id);
+    public void deleteById(@PathVariable int id){
+        this.gestionnaireService.deleteById(id);
     }
 }

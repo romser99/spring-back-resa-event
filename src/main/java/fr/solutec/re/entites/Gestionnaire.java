@@ -1,7 +1,12 @@
 package fr.solutec.re.entites;
 
-public class Gestionnaire extends Personne{
+import javax.persistence.*;
 
+@Entity
+@Table(name = "gestionnaire")
+public class Gestionnaire extends Personne{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     public Gestionnaire(int id) {

@@ -21,16 +21,22 @@ public class AdresseController {
 
 
 
-    @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Adresse adresse){
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+    public void save(@RequestBody Adresse adresse){
         System.out.println("[controler]creation d'une nouvelle adresse");
-        this.adresseService.create(adresse);
+        this.adresseService.save(adresse);
 
     }
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Set<Adresse> readALL(){
+    @GetMapping
+    public @ResponseBody Iterable<Adresse> findAll(){
         System.out.println("lecture des adresses");
-        return this.adresseService.readALL();
+        return this.adresseService.findAll();
+
+    }
+    @GetMapping(path = "{id}")
+    public @ResponseBody Adresse findById(@PathVariable int id){
+        System.out.println("lecture des adresses");
+        return this.adresseService.findById(id);
 
     }
 

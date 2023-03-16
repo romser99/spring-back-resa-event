@@ -24,14 +24,14 @@ public class EquipeController {
 
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Equipe equipe){
-        this.equipeService.create(equipe);
+    public void save(@RequestBody Equipe equipe){
+        this.equipeService.save(equipe);
 
     }
 
     @GetMapping(path = "{id}")
     public Equipe read (@PathVariable int id) {
-        Equipe equipe = this.equipeService.read(id) ;
+        Equipe equipe = this.equipeService.findById(id) ;
         return equipe ;
     }
 
@@ -55,8 +55,8 @@ public class EquipeController {
 
     }
     @DeleteMapping(path = "{id}")
-    public void delete (@PathVariable int id){
-        this.equipeService.delete(id);
+    public void deleteById(@PathVariable int id){
+        this.equipeService.deleteById(id);
     }
 
     @PatchMapping(path ="{ideq}/role" )

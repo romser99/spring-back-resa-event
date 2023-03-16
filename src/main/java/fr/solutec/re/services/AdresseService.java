@@ -2,34 +2,45 @@ package fr.solutec.re.services;
 
 import fr.solutec.re.dao.AdresseDAO;
 import fr.solutec.re.entites.Adresse;
+import fr.solutec.re.entites.Lieu;
+import fr.solutec.re.repository.AdresseRepository;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Optional;
 import java.util.Set;
 @Service
 
 
 public class AdresseService {
     private AdresseDAO adresseDAO ;
+    private AdresseRepository adresseRepository;
 
-    public AdresseService(AdresseDAO adresseDAO) {
+    public AdresseService(AdresseDAO adresseDAO, AdresseRepository adresseRepository) {
         this.adresseDAO = adresseDAO;
+        this.adresseRepository = adresseRepository;
     }
 
-    public Adresse create(Adresse adresse){
+    public Adresse save(Adresse adresse){
         System.out.println("[service]creation d'une nouvelle adresse");
-        return this.adresseDAO.create(adresse);
+        return this.adresseRepository.save(adresse);
 
     }
 
-    public Set<Adresse> readALL(){
+    public Iterable<Adresse> findAll(){
         System.out.println("lecture des adresses");
-        return this.adresseDAO.readALL();
+        return this.adresseRepository.findAll();
+
+    }
+
+    public Adresse findById(int id){
+        Optional<Adresse> optionalAdresse = this.adresseRepository.findById(id) ;
+        return optionalAdresse.get();
 
     }
 
     public void delete(int id){
-        this.adresseDAO.delete(id);
+        this.adresseRepository.deleteById(id);
 
     }
 }

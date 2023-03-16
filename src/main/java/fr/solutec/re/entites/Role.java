@@ -2,7 +2,13 @@ package fr.solutec.re.entites;
 
 import fr.solutec.re.enums.RoleEnum;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "role")
 public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
     private RoleEnum libelle ;
 

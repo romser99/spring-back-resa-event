@@ -1,8 +1,16 @@
 package fr.solutec.re.entites;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "lieu")
+
 public class Lieu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
     public String nom ;
+    @OneToOne
     private Adresse adresse;
 
     public Lieu(int id, String nom) {

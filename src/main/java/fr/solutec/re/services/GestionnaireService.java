@@ -5,29 +5,32 @@ import fr.solutec.re.dao.LieuDAO;
 import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Gestionnaire;
 import fr.solutec.re.entites.Lieu;
+import fr.solutec.re.repository.GestionnaireRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class GestionnaireService {
     private GestionnaireDAO gestionnaireDAO ;
+    private GestionnaireRepository gestionnaireRepository;
 
-    public GestionnaireService(GestionnaireDAO gestionnaireDAO) {
+    public GestionnaireService(GestionnaireDAO gestionnaireDAO, GestionnaireRepository gestionnaireRepository) {
         this.gestionnaireDAO = gestionnaireDAO;
+        this.gestionnaireRepository = gestionnaireRepository;
     }
 
-    public void create(Gestionnaire gestionnaire){
-
-        this.gestionnaireDAO.create(gestionnaire);
+    public void save(Gestionnaire gestionnaire){
+        this.gestionnaireRepository.save(gestionnaire);
 
     }
 
-    public Gestionnaire read(int id){
-        Gestionnaire gestionnaire = this.gestionnaireDAO.read(id);
-        return gestionnaire;
+    public Gestionnaire findById(int id){
+        Optional<Gestionnaire> optionalgestionnaire = this.gestionnaireRepository.findById(id);
+        return optionalgestionnaire.get();
 
     }
 
@@ -42,8 +45,8 @@ public class GestionnaireService {
         return this.gestionnaireDAO.search(nparams) ;
     }
 
-    public void delete(int id){
-        this.gestionnaireDAO.delete(id);
+    public void deleteById(int id){
+        this.gestionnaireRepository.deleteById(id);
 
     }
 }

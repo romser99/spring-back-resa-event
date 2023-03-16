@@ -1,12 +1,17 @@
 package fr.solutec.re.entites;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Personne {
 
-    private String prenom ;
-    private String nom ;
-    private String email ;
-    private String telephone ;
-    private String password;
+    protected String prenom ;
+    protected String nom ;
+    @Column(name = "mail")
+    protected String email ;
+    protected String telephone ;
+    protected String password;
 
     public Personne( String prenom, String nom, String email, String telephone, String password) {
         this.prenom = prenom;

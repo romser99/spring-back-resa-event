@@ -2,32 +2,33 @@ package fr.solutec.re.services;
 
 import fr.solutec.re.dao.ClientDAO;
 import fr.solutec.re.entites.Client;
-import fr.solutec.re.entites.Lieu;
+import fr.solutec.re.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ClientService {
     private ClientDAO clientDAO ;
+    private ClientRepository clientRepository ;
 
-    public ClientService(ClientDAO clientDAO) {
+    public ClientService(ClientDAO clientDAO, ClientRepository clientRepository) {
         this.clientDAO = clientDAO;
+        this.clientRepository = clientRepository;
     }
 
-    public void create(Client client){
+    public void save(Client client){
+        this.clientRepository.save(client);
 
-        this.clientDAO.create(client);
+    }
+
+    public Client findById(int id){
+        Optional<Client> optionalclient = this.clientRepository.findById(id);
+        return optionalclient.get() ;
 
     }
 
-    public Client read(int id){
-        Client client = this.clientDAO.read(id);
-        return client;
 
-    }
 
     public Set<Client> search(Map<String, String> params){
         Map<String, String> nparams =  new HashMap<>();
@@ -40,11 +41,22 @@ public class ClientService {
         return this.clientDAO.search(nparams) ;
     }
 
+    /*public void modify(Map<String, String> params){
+        Map<String, String> nparams =  new HashMap<>();
+        for (String key: params.keySet()) {
+            if(params.get(key) != null ) {
+                nparams.put(key, params.get(key) ) ;
+            }
+        }
+
+        this.clientDAO.modify(nparams) ;
+    }*/
 
 
 
-    public void delete(int id){
-        this.clientDAO.delete(id);
+
+    public void deleteById(int id){
+        this.clientRepository.deleteById(id);
 
     }
 }

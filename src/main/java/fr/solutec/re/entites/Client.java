@@ -1,6 +1,13 @@
 package fr.solutec.re.entites;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "client")
 public class Client extends Personne{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     public Client(String prenom, String nom, String email, String telephone, String password, int id) {

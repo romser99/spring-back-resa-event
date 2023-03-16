@@ -1,9 +1,16 @@
 package fr.solutec.re.entites;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "adresse")
 public class Adresse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int numero;
     private String rue;
+    @Column(name = "code_postal")
     private int codePostal ;
     private String ville ;
     private String region ;
