@@ -30,7 +30,7 @@ public class EquipeController {
     }
 
     @GetMapping(path = "{id}")
-    public Equipe read (@PathVariable int id) {
+    public Equipe findById(@PathVariable int id) {
         Equipe equipe = this.equipeService.findById(id) ;
         return equipe ;
     }

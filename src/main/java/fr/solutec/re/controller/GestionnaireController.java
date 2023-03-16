@@ -28,7 +28,7 @@ public class GestionnaireController {
     }
 
     @GetMapping(path = "{id}")
-    public Gestionnaire read (@PathVariable int id) {
+    public Gestionnaire finById(@PathVariable int id) {
         Gestionnaire gestionnaire = this.gestionnaireService.findById(id) ;
         return gestionnaire ;
     }
