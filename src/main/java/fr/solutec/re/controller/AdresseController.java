@@ -28,7 +28,7 @@ public class AdresseController {
     }
 
     @RequestMapping(method = GET)
-    public @ResponseBody Set<Adresse> readAll() {
+    public @ResponseBody Iterable<Adresse> readAll() {
         System.out.println("Lecture des adresses");
         return this.adresseService.readAll();
     }

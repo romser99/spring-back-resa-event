@@ -24,7 +24,7 @@ public class AdresseDAO {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection
-                    .prepareStatement("INSERT INTO ADRESSE (numero,rue,code_postal,ville,region,pays) VALUES(?,?,?,?,?,?)",
+                    .prepareStatement("INSERT INTO ADRESSE (numero,rue,codepostal,ville,region,pays) VALUES(?,?,?,?,?,?)",
                             Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1,adresse.getNumero());
                 ps.setString(2,adresse.getRue());

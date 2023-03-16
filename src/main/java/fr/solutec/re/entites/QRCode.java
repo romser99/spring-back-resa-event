@@ -1,6 +1,12 @@
 package fr.solutec.re.entites;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "qrcode")
 public class QRCode {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String url;

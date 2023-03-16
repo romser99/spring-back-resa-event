@@ -2,10 +2,7 @@ package fr.solutec.re.controller;
 
 import fr.solutec.re.entites.QRCode;
 import fr.solutec.re.services.QRCodeService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -27,15 +24,22 @@ public class QRCodeController {
         this.qrcodeService.create(qrcode);
     }
 
-    @RequestMapping(method = DELETE, consumes = APPLICATION_JSON_VALUE)
-    public void delete(@RequestBody QRCode qrcode) {
+    @DeleteMapping(path = "{id}")
+    public void delete(@PathVariable int id) {
         System.out.println("[Controller] Supression ancien qrcode");
-        this.qrcodeService.delete(qrcode);
+        this.qrcodeService.delete(id);
     }
 
-    @RequestMapping(method = GET)
-    public @ResponseBody Set<QRCode> readAll() {
-        System.out.println("Lecture des qrcodes");
+    @GetMapping(path = "all")
+    public @ResponseBody Iterable<QRCode> readAll() {
+        System.out.println("[Controller] Lecture des qrcodes");
         return this.qrcodeService.readAll();
+    }
+
+    @GetMapping(path = "{id}")
+    public @ResponseBody QRCode read(@PathVariable int id) {
+        System.out.println("[Controller] Lecture du qrcode");
+        QRCode qrcode = this.qrcodeService.read(id);
+        return qrcode;
     }
 }

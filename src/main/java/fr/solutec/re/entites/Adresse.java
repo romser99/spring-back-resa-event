@@ -1,6 +1,13 @@
 package fr.solutec.re.entites;
 
+import fr.solutec.re.entites.Adresse;
+import javax.persistence.*;
+
+@Entity
+@Table(name ="adresse")
 public class Adresse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int numero;
     private String rue;

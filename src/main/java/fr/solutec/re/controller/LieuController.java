@@ -1,15 +1,12 @@
 package fr.solutec.re.controller;
 
-
-
 import fr.solutec.re.entites.Lieu;
 import fr.solutec.re.services.AdresseService;
 import fr.solutec.re.services.LieuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -20,6 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class LieuController {
 
     private LieuService lieuService;
+
     public LieuController(LieuService lieuService) {
         this.lieuService = lieuService;
     }
@@ -30,23 +28,42 @@ public class LieuController {
         this.lieuService.create(lieu);
     }
 
-    @GetMapping(path="{id}")
+    @DeleteMapping(path = "{id}")
+    public void delete(@PathVariable int id) {
+        System.out.println("[Controller] Supression ancien lieu");
+        this.lieuService.delete(id);
+    }
+
+    @GetMapping(path = "all")
+    public @ResponseBody Iterable<Lieu> readAll() {
+        System.out.println("[Controller] Lecture des lieux");
+        return this.lieuService.readAll();
+    }
+
+    @GetMapping(path = "{id}")
     public @ResponseBody Lieu read(@PathVariable int id) {
-        System.out.println("Lecture du lieu");
+        System.out.println("[Controller] Lecture du lieu");
         Lieu lieu = this.lieuService.read(id);
         return lieu;
     }
 
     @GetMapping
-    public @ResponseBody Set<Lieu> search(Map<String, String> params) {
+    public @ResponseBody Iterable<Lieu> search(@RequestParam(required = false) String nom,
+                                                 @RequestParam(required = false) String rue,
+                                                 @RequestParam(required = false) String ville,
+                                                 @RequestParam(required = false) String region){
+        System.out.println("[Controller] Recherche du lieu");
+        List<String> params = new ArrayList<>() ;
+        if (nom != null){        params.add(nom);    }
+        else {        params.add("");    }
+        if (rue != null){        params.add(rue);    }
+        else {        params.add("");    }
+        if (ville != null){        params.add(ville);    }
+        else {        params.add("");    }
+        if (region != null){        params.add(region);    }
+        else {        params.add("");    }
         return this.lieuService.search(params);
     }
 
-    /*
-    @GetMapping
-    public @ResponseBody Set<Lieu> readAll() {
-        System.out.println("Lecture des lieux");
-        return this.lieuService.readAll();
-    }
-    */
 }
+
