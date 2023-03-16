@@ -1,16 +1,21 @@
 package fr.solutec.resaevent.entites;
 
-public class Adresse {
+import javax.persistence.*;
 
+@Entity
+@Table (name = "ADRESSE")
+public class Adresse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int numero;
     private String rue;
+    @Column(name="CODE_POSTAL")
     private int codePostal;
     private String ville;
     private String region;
     private String pays;
     public Adresse(){}
-
     public Adresse(int id, int numero, String rue, int codePostal, String ville, String region, String pays) {
         this.id = id;
         this.numero = numero;

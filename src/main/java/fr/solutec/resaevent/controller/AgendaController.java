@@ -2,8 +2,7 @@ package fr.solutec.resaevent.controller;
 import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.services.AgendaService;
 import org.springframework.web.bind.annotation.*;
-import java.util.Set;
-import org.springframework.web.bind.annotation.RequestMethod;
+import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping(path = "agenda", produces = APPLICATION_JSON_VALUE)
@@ -13,25 +12,36 @@ public class AgendaController {
     public AgendaController(AgendaService agendaService){
         this.agendaService = agendaService;
     }
-    @PostMapping (consumes = APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Agenda agenda){
-        System.out.println("Création d'un nouvel agenda");
-        this.agendaService.create(agenda);
-    }
+
+    //SEARCH
     @GetMapping
-    public @ResponseBody Set<Agenda> readAll() {
+    public @ResponseBody Iterable<Agenda> findAll() {
         System.out.println("Lecture du calendrier");
-        return this.agendaService.readAll();
+        return this.agendaService.findAll();
     }
+    //CREATE
+    @PostMapping (consumes = APPLICATION_JSON_VALUE)
+    public void save(@RequestBody Agenda agenda){
+        System.out.println("Création d'une nouvelle date");
+        this.agendaService.save(agenda);
+    }
+    //READ
+    @GetMapping (path = "{id}")
+    public @ResponseBody Optional<Agenda> findById(@PathVariable int id) {
+        System.out.println("Lecture d'une adresse");
+        return this.agendaService.findById(id);
+    }
+    //UPDATE
     @PutMapping
     public void update(@RequestBody Agenda agenda) {
         System.out.println("Mise à jour du calendrier");
-        this.agendaService.update(agenda);
+        this.agendaService.save(agenda);
     }
-    @DeleteMapping
-    public void delete(@RequestBody Agenda agenda) {
-        System.out.println("Suppression du calendrier");
-        this.agendaService.delete(agenda);
+    //DELETE
+    @DeleteMapping (path = "{id}")
+    public Agenda deleteById(@PathVariable int id) {
+        System.out.println("Suppression d'une date du calendrier");
+        this.agendaService.deleteById(id);
+        return null;
     }
-
 }

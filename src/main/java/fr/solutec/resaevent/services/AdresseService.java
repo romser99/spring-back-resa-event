@@ -1,11 +1,8 @@
 package fr.solutec.resaevent.services;
-
-import fr.solutec.resaevent.dao.AdresseDAO;
 import fr.solutec.resaevent.entites.Adresse;
+import fr.solutec.resaevent.repository.AdresseRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 @Service
 public class AdresseService {
@@ -15,33 +12,30 @@ public class AdresseService {
      adresseDAO objet de l'instance
      new AdresseDAO() creation de l'instance */
 
-    private AdresseDAO adresseDAO;
-    public AdresseService(AdresseDAO adresseDAO) {
-        this.adresseDAO = adresseDAO;
+    private AdresseRepository adresseRepository;
+    public AdresseService(AdresseRepository adresseRepository) {
+        this.adresseRepository = adresseRepository;
     }
-    public Adresse create(Adresse adresse){
-        //Appel de la méthode create qui est dans AdresseDAO
+    //SEARCH
+    public Iterable<Adresse> findAll() {
+        return this.adresseRepository.findAll();
+    }
+    //READ
+    public Optional<Adresse> findById(int id) {
+        return this.adresseRepository.findById(id);
+    }
+    //CREATE + UPDATE
+    public Adresse save(Adresse adresse){
         if (adresse.getRegion() == null) {
             adresse.setRegion("Ile-de-France");
         }
         if (adresse.getPays() == null) {
             adresse.setPays("France");
         }
-        return this.adresseDAO.create(adresse);
+        return this.adresseRepository.save(adresse);
     }
-    public Set<Adresse> readAll() {
-        return this.adresseDAO.readAll();
-    }
-}
-
-/*
-    public List<Adresse> read() {
-        return this.adresseDAO.read();
-    }
-
-    public List<Adresse> getOne(int id) {
-        return this.adresseDAO.getOne(id);
+    public Adresse delete(int id){
+        this.adresseRepository.deleteById(id);
+        return null;
     }
 }
-*/
-

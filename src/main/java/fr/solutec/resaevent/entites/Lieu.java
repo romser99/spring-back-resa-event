@@ -1,9 +1,16 @@
 package fr.solutec.resaevent.entites;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "LIEU")
 public class Lieu {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
-    private int idAdresse;
+    @OneToOne
     private Adresse adresse;
 
     public Lieu(){}
@@ -11,10 +18,8 @@ public class Lieu {
     public Lieu(int id, String nom, int idAdresse, Adresse adresse) {
         this.id = id;
         this.nom = nom;
-        this.idAdresse = idAdresse;
         this.adresse = adresse;
     }
-
     public int getId() {
         return id;
     }
@@ -31,17 +36,10 @@ public class Lieu {
         this.nom = nom;
     }
 
-    public void setIdAdresse(int idAdresse) {
-        this.idAdresse = idAdresse;
-    }
-    public int getIdAdresse() {
-        return idAdresse;
-    }
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
     }
     public Adresse getAdresse() {
         return adresse;
     }
-
 }

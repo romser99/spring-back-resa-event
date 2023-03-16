@@ -1,9 +1,13 @@
 package fr.solutec.resaevent.entites;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
-
+@Entity
+@Table(name = "AGENDA")
 public class Agenda {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date dateDebut;
     private Date dateFin;

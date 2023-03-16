@@ -1,28 +1,29 @@
 package fr.solutec.resaevent.services;
-
-import fr.solutec.resaevent.dao.AgendaDAO;
 import fr.solutec.resaevent.entites.Agenda;
+import fr.solutec.resaevent.repository.AgendaRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
+import java.util.Optional;
 @Service
 public class AgendaService {
-    private AgendaDAO agendaDAO;
-
-    public AgendaService(AgendaDAO agendaDAO){
-        this.agendaDAO = agendaDAO;
+    private AgendaRepository agendaRepository;
+    public AgendaService(AgendaRepository agendaRepository) {
+        this.agendaRepository = agendaRepository;
     }
-    public Agenda create (Agenda agenda) {
-        //Appel de la méthode create qui est dans AgendaDAO
-        return this.agendaDAO.create(agenda);
+    //SEARCH
+    public Iterable<Agenda> findAll() {
+        return this.agendaRepository.findAll();
     }
-    public Set<Agenda> readAll() {
-       return this.agendaDAO.readAll();
+    //READ
+    public Optional<Agenda> findById(int id) {
+        return this.agendaRepository.findById(id);
     }
-    public Agenda update(Agenda agenda) {
-        return this.agendaDAO.update(agenda);
+    //CREATE + UPDATE
+    public Agenda save(Agenda agenda){
+        return this.agendaRepository.save(agenda);
     }
-    public Agenda delete(Agenda agenda) {
-       return this.agendaDAO.delete(agenda);
-   }
+    //DELETE
+    public Agenda deleteById(int id){
+        this.agendaRepository.deleteById(id);
+        return null;
+    }
 }

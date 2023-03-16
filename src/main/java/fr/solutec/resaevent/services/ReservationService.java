@@ -1,7 +1,38 @@
 package fr.solutec.resaevent.services;
 
 
-public class ReservationService {/*
+import fr.solutec.resaevent.entites.Agenda;
+import fr.solutec.resaevent.entites.Reservation;
+import fr.solutec.resaevent.repository.ReservationRepository;
+
+import java.util.Optional;
+
+public class ReservationService {
+
+    private ReservationRepository reservationRepository;
+
+    public ReservationService(ReservationRepository reservationRepository){
+        this.reservationRepository = reservationRepository;
+    }
+    //SEARCH
+    public Iterable<Reservation> findAll() {
+        return this.reservationRepository.findAll();
+    }
+    //READ
+    public Optional<Reservation> findById(int id) {
+        return this.reservationRepository.findById(id);
+    }
+    //CREATE + UPDATE
+    public Reservation save(Reservation reservation){
+        return this.reservationRepository.save(reservation);
+    }
+    //SEARCH
+    public Reservation deleteById(int id){
+        this.reservationRepository.deleteById(id);
+        return null;
+    }
+}
+    /*
     AgendaService agendaService;
     RoleService roleService;
     public Reservation create () {
@@ -27,4 +58,3 @@ public class ReservationService {/*
             " pour " + resa.getResa_place() + " est validé.");
     }
     */
-}

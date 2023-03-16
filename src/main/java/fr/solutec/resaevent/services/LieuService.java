@@ -1,41 +1,42 @@
 package fr.solutec.resaevent.services;
-
-import fr.solutec.resaevent.dao.AdresseDAO;
 import fr.solutec.resaevent.entites.Adresse;
-import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.entites.Lieu;
-import fr.solutec.resaevent.dao.LieuDAO;
-import org.springframework.jdbc.core.JdbcTemplate;
+import fr.solutec.resaevent.repository.LieuRepository;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Optional;
 
 @Service
 public class LieuService {
-    private LieuDAO lieuDAO;
+    private LieuRepository lieuRepository;
     private AdresseService adresseService;
 
-    public LieuService(LieuDAO lieuDAO, AdresseService adresseService) {
-        this.lieuDAO = lieuDAO;
+    public LieuService(LieuRepository lieuRepository, AdresseService adresseService) {
+        this.lieuRepository = lieuRepository;
         this.adresseService = adresseService;
     }
-    public void create(Lieu lieu) {
-        //Appel de la méthode create qui est dans LieuDAO
-        Adresse adresse = this.adresseService.create(lieu.getAdresse());
+    //SEARCH = FINDALL
+    public Iterable<Lieu> findAll(Map<String, String> params){
+        return this.lieuRepository.findAll();
+    }
+    //CREATE + UPDATE = SAVE
+    public void save(Lieu lieu) {
+        Adresse adresse = this.adresseService.findById(lieu.getAdresse().getId()).get();
+        if (adresse.getRue() == null) {
+        }
         lieu.setAdresse(adresse);
-        this.lieuDAO.create(lieu);
+        this.lieuRepository.save(lieu);
     }
-    public Lieu read(int id){
-        Lieu lieu = this.lieuDAO.read(id);
-        return lieu;
+    //READ = FINDBYID
+    public Lieu findById(int id){
+        Optional<Lieu> optionalLieu = this.lieuRepository.findById(id);
+        return optionalLieu.get();
     }
-    public Set<Lieu> search(Map<String, String> params){
-        return this.lieuDAO.search(params);
-    }
-
-    public Lieu update(Lieu lieu) {
-        return this.lieuDAO.update(lieu);
+    //DELETE
+    public Lieu delete(Lieu lieu) {
+        Adresse adresse = this.adresseService.findById(lieu.getAdresse().getId()).get();
+        lieu.setAdresse(adresse);
+        this.lieuRepository.delete(lieu);
+        return null;
     }
 }
-
