@@ -42,7 +42,7 @@ public class EvenementDAO {
             Evenement evenement = new Evenement();
             Type type = new Type();
 
-            type.setId((int)item.get("t_id"));
+            type.setId((int) item.get("t_id"));
             type.setNom((String) item.get("t_nom"));
 
             evenement.setId((int) item.get("e_id"));
@@ -127,16 +127,15 @@ public class EvenementDAO {
         }
     }
 
-    public Set<Evenement> search(Map<String, String> params) {
+    public List<Evenement> search(Map<String, String> params) {
         List<Evenement> evenements = new ArrayList<>();
-        String QUERY = "SELECT e.id AS e_id, e.nom AS e_nom, t.nom AS t_nom FROM EVENEMENT e JOIN TYPE t ON type_id = t.id";
+        String QUERY = "SELECT e.id AS e_id, e.nom AS e_nom, t.id AS t_id, t.nom AS t_nom, e.description AS e_description FROM EVENEMENT e JOIN TYPE t ON type_id = t.id";
         if (!params.isEmpty()) {
             List<String> keys = List.copyOf(params.keySet());
             for (int i = 0; i < keys.size(); i++) {
-                if (i==0) {
-                    QUERY += " WHERE " + keys.get(i) + "Like '%" + params.get(keys.get(i)) + "%'";
-                }
-                else {
+                if (i == 0) {
+                    QUERY += " WHERE " + keys.get(i) + " Like '%" + params.get(keys.get(i)) + "%'";
+                } else {
                     QUERY += " AND " + keys.get(i) + " Like '%" + params.get(keys.get(i)) + "%'";
                 }
             }
@@ -144,15 +143,30 @@ public class EvenementDAO {
         List<Map<String, Object>> items = jdbcTemplate.queryForList(QUERY);
         for (Map<String, Object> item : items) {
             Evenement evenement = new Evenement();
+            Type type = new Type();
 
             evenement.setId((int) item.get("e_id"));
             evenement.setNom((String) item.get("e_nom"));
-            evenement.setDescription((String) item.get("t_nom"));
+            evenement.setDescription((String)item.get("e_description"));
+            type.setId((int)item.get("t_id"));
+            type.setNom((String)item.get("t_nom"));
+            evenement.setType(type);
+
+            /// rajouter type
+
             evenements.add(evenement);
         }
-        return Set.copyOf(evenements);
+        return List.copyOf(evenements);
     }
 
+
+    public void deleteparid(int idevt) {
+        System.out.println("[DAO] Suppression d'un évènement");
+        jdbcTemplate.update("DELETE FROM EVENEMENT WHERE id = ?", idevt);
+    }
+
+
+    /*
 
     public void updatenom(String nomevt, int idevt) {
         System.out.println("[DAO] Update d'un nom");
@@ -182,12 +196,7 @@ public class EvenementDAO {
             }
         }
         jdbcTemplate.update(QUERY);
-    }
+    } */
 
-
-        public void deleteparid ( int idevt){
-            System.out.println("[DAO] Suppression d'un évènement");
-            jdbcTemplate.update("DELETE FROM EVENEMENT WHERE id = ?", idevt);
-        }
-    }
+}
 

@@ -3,6 +3,8 @@ package fr.solutec.re.controller;
 import fr.solutec.re.entites.Type;
 import fr.solutec.re.service.EvenementService;
 import fr.solutec.re.entites.Evenement;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -30,17 +32,17 @@ public class EvenementController {
     /* ///////////////////////////////////READ////////////////////////////////////// */
 
     @GetMapping (path = "readall")
-    public @ResponseBody Iterable<Evenement> readAll() {
+    public  @ResponseBody Iterable<Evenement> readAll() {
         return this.evenementService.readAll();
     }
 
     @GetMapping
-    public @ResponseBody Set<Evenement> search(
+    public @ResponseBody List<Evenement> search(
             @RequestParam(required = false) String nom,
             @RequestParam(required = false) String type){
         Map<String, String> params = new HashMap<>();
-        params.put("nom", nom);
-        params.put("type", type);
+        params.put("e.nom", nom);
+        params.put("t.nom", type);
         return this.evenementService.search(params);
     }
 
@@ -69,6 +71,4 @@ public class EvenementController {
         System.out.println("[controller] Update du type de l'évènement");
         this.evenementService.updatetype(description, idevt);
     } */
-
-
 }

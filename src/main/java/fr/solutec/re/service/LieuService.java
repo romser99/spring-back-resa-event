@@ -28,6 +28,11 @@ public class LieuService {
 
     public Lieu read(int id) {
         Optional<Lieu> optionalLieu = this.lieuRepository.findById(id); // peut-être qu'il n'y a pas de lieu correspondant
+        //// gestion de l'erreur
+        if(optionalLieu.isEmpty()) {
+            String message = String.format("Aucun lieu n'a l'id %s", id);
+            throw new IllegalArgumentException();
+        }
         return optionalLieu.get();
     }
 

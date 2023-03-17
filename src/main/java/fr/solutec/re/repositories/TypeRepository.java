@@ -12,4 +12,6 @@ public interface TypeRepository extends CrudRepository <Type, Integer> {
    // List<Lieu> search(String nom);
    // List<Lieu> findByNomContains(String nom);
    // void deleteByNom(String nomtype);
+
+    Type findByNom(String nomtype);
 }

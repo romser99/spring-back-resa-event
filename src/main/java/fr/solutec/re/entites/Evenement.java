@@ -8,11 +8,12 @@ import java.util.Date;
 @Table( name = "evenement")
 public class Evenement {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Type type;
 
     public Evenement() {

@@ -17,19 +17,21 @@ public class TypeController {
 
     @PostMapping
     public void create(@RequestBody Type type) {
-        System.out.println("[controller] Création d'un nouveau type");
         this.typeService.create(type);
     }
 
-    @GetMapping
+   @GetMapping (path = "readall")
     public Iterable<Type> readAll() {
-        System.out.println("[controller] Lecture des types");
         return this.typeService.readAll();
+    }
+
+    @GetMapping
+    public Type readByNom(String nomtype) {
+        return this.typeService.readByNom(nomtype);
     }
 
     @DeleteMapping (path = "{idtype}")
     public void delete(@PathVariable int idtype) {
-        System.out.println("[controller] Suppression d'un type");
         typeService.delete(idtype);
     }
 

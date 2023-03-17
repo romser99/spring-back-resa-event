@@ -11,18 +11,25 @@ import java.util.*;
 
 @Service
 public class EvenementService {
+
+    private TypeService typeService;
     private EvenementDAO evenementDAO;
 
     private EvenementRepository evenementRepository;
 
-    public EvenementService(EvenementDAO evenementDAO, EvenementRepository evenemntRepository) {
+    public EvenementService(TypeService typeService, EvenementDAO evenementDAO, EvenementRepository evenementRepository) {
+        this.typeService = typeService;
         this.evenementDAO = evenementDAO;
-        this.evenementRepository = evenemntRepository;
+        this.evenementRepository = evenementRepository;
     }
 
     /* ///////////////////////////////////////CREATE&UPDATE/////////////////////////////// */
 
     public void create(Iterable<Evenement> evts) {
+        evts.forEach(evenement -> {
+            Type type = this.typeService.readByNom(evenement.getType().getNom());
+            evenement.setType(type);
+        });
         this.evenementRepository.saveAll(evts);
     }
 
@@ -32,25 +39,30 @@ public class EvenementService {
         return this.evenementRepository.findAll();
     }
 
-    public Set<Evenement> search(Map<String, String> params){
-        Map<String, String> nparams =  new HashMap<>();
-        for (String key: params.keySet()) {
-            if(params.get(key) != null ) {
-                nparams.put(key, params.get(key) ) ;
+    public List<Evenement> search(Map<String, String> params) {
+        Map<String, String> nparams = new HashMap<>();
+        for (String key : params.keySet()) {
+            if (params.get(key) != null) {
+                nparams.put(key, params.get(key));
             }
         }
-        return this.evenementDAO.search(nparams) ;
+        return this.evenementDAO.search(nparams);
     }
 
-    public Iterable<Evenement> readparid(Iterable<Integer> idevt) {
+    /* public Iterable<Evenement> readparid(Iterable<Integer> idevt) {
         return this.evenementRepository.findAllById(idevt);
-    }
-
+    } */
 
     /* //////////////////////////////////DELETE/////////////////////////////////////// */
 
-    public void deleteparid(Iterable<Integer> id) {
-        this.evenementRepository.deleteAllById(id);
+    public void deleteparid(Iterable<Integer> ids) {
+        for (int id : ids) {
+            if (evenementRepository.existsById(id)) {
+                String message = String.format("Aucun évènement n'a l'id %s", id);
+                throw new IllegalArgumentException();
+            }
+            this.evenementRepository.deleteAllById(ids);
+        }
     }
 
     /* //////////////////////////////////UPDATE///////////////////////////////////////

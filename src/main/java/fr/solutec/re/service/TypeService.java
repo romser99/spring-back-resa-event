@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TypeService {
 
-    TypeRepository typeRepository;
+    private TypeRepository typeRepository;
+
 
     public TypeService(TypeRepository typeRepository) {
         this.typeRepository = typeRepository;
@@ -20,6 +21,10 @@ public class TypeService {
     public Iterable<Type> readAll() {
         System.out.println("[service] Lecture des types");
         return this.typeRepository.findAll();
+    }
+
+    public Type readByNom(String nomtype) {
+        return this.typeRepository.findByNom(nomtype);
     }
 
     public void delete(int idtype) {
