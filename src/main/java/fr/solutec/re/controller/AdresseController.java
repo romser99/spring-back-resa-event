@@ -27,9 +27,16 @@ public class AdresseController {
         this.adresseService.create(adresse);
     }
 
-    @RequestMapping(method = GET)
+    @RequestMapping(method = GET, path = "all")
     public @ResponseBody Iterable<Adresse> readAll() {
-        System.out.println("Lecture des adresses");
+        System.out.println("[Controller] Lecture des adresses");
         return this.adresseService.readAll();
+    }
+
+    @RequestMapping(method = GET, path = "{id}")
+    public @ResponseBody Adresse read(@PathVariable int id) {
+        System.out.println("[Controller] Lecture de l'adresse");
+        Adresse adresse = this.adresseService.read(id);
+        return adresse;
     }
 }

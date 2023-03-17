@@ -4,8 +4,12 @@ import fr.solutec.re.entites.Lieu;
 import fr.solutec.re.services.AdresseService;
 import fr.solutec.re.services.LieuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.net.BindException;
 import java.util.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -23,7 +27,7 @@ public class LieuController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Lieu lieu) {
+    public void create(@RequestBody Lieu lieu) throws BindException {
         System.out.println("[Controller] Creation nouveau lieu");
         this.lieuService.create(lieu);
     }
@@ -43,9 +47,9 @@ public class LieuController {
     @GetMapping(path = "{id}")
     public @ResponseBody Lieu read(@PathVariable int id) {
         System.out.println("[Controller] Lecture du lieu");
-        Lieu lieu = this.lieuService.read(id);
-        return lieu;
-    }
+            Lieu lieu = this.lieuService.read(id);
+            return lieu;
+        }
 
     @GetMapping
     public @ResponseBody Iterable<Lieu> search(@RequestParam(required = false) String nom,
