@@ -6,6 +6,7 @@ import fr.solutec.re.enums.RoleEnum;
 import fr.solutec.re.services.EquipeService;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.BindException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class EquipeController {
 
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void save(@RequestBody Equipe equipe){
+    public void save(@RequestBody Equipe equipe) throws BindException {
         this.equipeService.save(equipe);
 
     }

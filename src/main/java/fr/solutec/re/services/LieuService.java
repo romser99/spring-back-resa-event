@@ -32,6 +32,10 @@ public class LieuService {
 
     public Lieu read(int id){
         Optional<Lieu> optionalLieu = this.lieuRepository.findById(id) ;
+        if (optionalLieu.isEmpty()){
+            String message = String.format ("Aucun lieu n'a l'id %s", id);
+            throw new IllegalArgumentException(message) ;
+        }
         return optionalLieu.get() ;
 
     }

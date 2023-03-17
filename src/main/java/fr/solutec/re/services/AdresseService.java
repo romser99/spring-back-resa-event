@@ -35,7 +35,11 @@ public class AdresseService {
 
     public Adresse findById(int id){
         Optional<Adresse> optionalAdresse = this.adresseRepository.findById(id) ;
-        return optionalAdresse.get();
+        if (optionalAdresse.isEmpty()){
+            String message = String.format ("Aucune adresse n'a l'id %s", id);
+            throw new IllegalArgumentException(message) ;
+        }
+        return optionalAdresse.get() ;
 
     }
 

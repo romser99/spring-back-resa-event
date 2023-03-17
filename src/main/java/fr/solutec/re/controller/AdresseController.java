@@ -35,6 +35,7 @@ public class AdresseController {
     }
     @GetMapping(path = "{id}")
     public @ResponseBody Adresse findById(@PathVariable int id){
+
         System.out.println("lecture des adresses");
         return this.adresseService.findById(id);
 

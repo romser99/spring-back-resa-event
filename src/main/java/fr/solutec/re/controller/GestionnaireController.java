@@ -4,6 +4,7 @@ import fr.solutec.re.entites.Gestionnaire;
 import fr.solutec.re.services.GestionnaireService;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.BindException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class GestionnaireController {
 
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void save(@RequestBody Gestionnaire gestionnaire){
+    public void save(@RequestBody Gestionnaire gestionnaire) throws BindException {
         this.gestionnaireService.save(gestionnaire);
 
     }

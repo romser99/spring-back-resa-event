@@ -5,6 +5,7 @@ import fr.solutec.re.entites.Lieu;
 import fr.solutec.re.services.ClientService;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.BindException;
 import java.util.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -22,7 +23,7 @@ public class ClientController {
 
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void save(@RequestBody Client client){
+    public void save(@RequestBody Client client) throws BindException {
         this.clientService.save(client);
 
     }
@@ -56,21 +57,7 @@ public class ClientController {
         this.clientService.deleteById(id);
     }
 
-    /*@GetMapping
-    public void modify(@RequestParam String id,
-                       @RequestParam(required = false) String nom,
-                       @RequestParam(required = false) String prenom,
-                       @RequestParam(required = false) String mail,
-                       @RequestParam(required = false) String telephone){
-        Map<String, String> params = new HashMap<>();
-        params.put("id", id);
-        params.put("nom", nom);
-        params.put("prenom", prenom);
-        params.put("mail", mail);
-        params.put("telephone", telephone);
-        this.clientService.modify(params);
 
-    }*/
 
 }
 
