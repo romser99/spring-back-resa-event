@@ -21,10 +21,15 @@ public class AdresseController {
         return this.adresseService.findAll();
     }
     //READ
-    @GetMapping (path = "read/{id}")
+    @GetMapping (path = "findbyid/{id}")
     public @ResponseBody Optional<Adresse> findById(@PathVariable int id) {
         System.out.println("Lecture d'une adresse");
         return this.adresseService.findById(id);
+    }
+    @GetMapping (path = "read/{id}")
+    public @ResponseBody Adresse read(@PathVariable int id) {
+        System.out.println("Lecture d'une adresse");
+        return this.adresseService.read(id);
     }
     //CREATE + UPDATE
     @PostMapping (consumes = APPLICATION_JSON_VALUE)

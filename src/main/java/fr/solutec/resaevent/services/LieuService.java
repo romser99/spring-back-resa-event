@@ -22,14 +22,19 @@ public class LieuService {
     //CREATE + UPDATE = SAVE
     public void save(Lieu lieu) {
         Adresse adresse = this.adresseService.findById(lieu.getAdresse().getId()).get();
-        if (adresse.getRue() == null) {
-        }
+        if (adresse.getRue() == null) {}
         lieu.setAdresse(adresse);
         this.lieuRepository.save(lieu);
     }
     //READ = FINDBYID
     public Lieu findById(int id){
         Optional<Lieu> optionalLieu = this.lieuRepository.findById(id);
+
+        if(optionalLieu.isEmpty()){
+            //%S = PLACE HOLDER --> VARIABLE
+            String message = String.format("Aucun lieu n'a l'id %s", id);
+            throw new IllegalArgumentException(message);
+        }
         return optionalLieu.get();
     }
     //DELETE

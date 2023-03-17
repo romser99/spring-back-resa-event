@@ -1,7 +1,6 @@
 package fr.solutec.resaevent.dao;
 
 import fr.solutec.resaevent.entites.Adresse;
-import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.entites.Lieu;
 
 import java.sql.PreparedStatement;

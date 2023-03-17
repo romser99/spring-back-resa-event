@@ -1,7 +1,13 @@
 package fr.solutec.resaevent.controller;
 import fr.solutec.resaevent.entites.Lieu;
+import fr.solutec.resaevent.entites.Reservation;
 import fr.solutec.resaevent.services.LieuService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashMap;
 import java.util.Map;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -21,21 +27,27 @@ public class LieuController {
         return this.lieuService.findAll(params);
     }
     //CREATE + UPDATE
-    @PostMapping (consumes = APPLICATION_JSON_VALUE)
-        public void save(@RequestBody Lieu lieu) {
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+    public void save(@RequestBody Lieu lieu) {
         System.out.println("Nouveau lieu");
         this.lieuService.save(lieu);
     }
     //READ
     @GetMapping(path = "{id}")
-    public @ResponseBody Lieu findById(@PathVariable int id) {
-        System.out.println("Lecture d'une adresse en fonction du lieu");
-        Lieu lieu = this.lieuService.findById(id);
-        return lieu;
+    public @ResponseBody ResponseEntity findById(@PathVariable int id) {
+        try {
+            System.out.println("Lecture d'une adresse en fonction du lieu");
+            Lieu lieu = this.lieuService.findById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(lieu);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "NOT FOUND");
+        }
     }
     //DELETE
     @DeleteMapping
-    public Lieu delete(@RequestBody Lieu lieu) {
+    public Lieu delete(@RequestBody Lieu lieu){
         System.out.println("Suppression d'un lieu");
         this.lieuService.delete(lieu);
         return null;

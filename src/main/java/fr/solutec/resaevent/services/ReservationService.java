@@ -1,18 +1,22 @@
 package fr.solutec.resaevent.services;
-
-
+import fr.solutec.resaevent.a_client.entites.Client;
+import fr.solutec.resaevent.a_client.services.ClientService;
 import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.entites.Reservation;
 import fr.solutec.resaevent.repository.ReservationRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class ReservationService {
-
     private ReservationRepository reservationRepository;
+    private AgendaService agendaService;
+    private ClientService clientService;
 
-    public ReservationService(ReservationRepository reservationRepository){
+    public ReservationService(ReservationRepository reservationRepository, AgendaService agendaService, ClientService clientService) {
         this.reservationRepository = reservationRepository;
+        this.agendaService = agendaService;
+        this.clientService = clientService;
     }
     //SEARCH
     public Iterable<Reservation> findAll() {
@@ -23,15 +27,23 @@ public class ReservationService {
         return this.reservationRepository.findById(id);
     }
     //CREATE + UPDATE
-    public Reservation save(Reservation reservation){
-        return this.reservationRepository.save(reservation);
+    public void save(Reservation reservation){
+        //Qrcode qrcode = this.qrcodeService.findById(reservation.getQrcode().getId());
+        //Qrcode qrcode = this.qrcodeService.findById(reservation.getQrcode().getId());
+        //Place place = this.placeService.findById(reservation.getPlace().getId());
+        Client client = this.clientService.findById(reservation.getClient().getId());
+        Agenda agenda = this.agendaService.findById(reservation.getAgenda().getId());
+        reservation.setClient(client);
+        reservation.setAgenda(agenda);
+        this.reservationRepository.save(reservation);
     }
-    //SEARCH
+    //DELETE
     public Reservation deleteById(int id){
         this.reservationRepository.deleteById(id);
         return null;
     }
 }
+
     /*
     AgendaService agendaService;
     RoleService roleService;

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping(path = "RESERVATION", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(path = "reservation", produces = APPLICATION_JSON_VALUE)
 @RestController
 public class ReservationController {
     private ReservationService reservationService;

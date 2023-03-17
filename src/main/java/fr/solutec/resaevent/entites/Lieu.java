@@ -1,6 +1,4 @@
 package fr.solutec.resaevent.entites;
-
-
 import javax.persistence.*;
 
 @Entity

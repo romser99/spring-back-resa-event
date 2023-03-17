@@ -2,6 +2,7 @@ package fr.solutec.resaevent.controller;
 import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.services.AgendaService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -27,13 +28,14 @@ public class AgendaController {
     }
     //READ
     @GetMapping (path = "{id}")
-    public @ResponseBody Optional<Agenda> findById(@PathVariable int id) {
+    public @ResponseBody Agenda findById(@PathVariable int id) {
         System.out.println("Lecture d'une adresse");
         return this.agendaService.findById(id);
     }
+
     //UPDATE
     @PutMapping
-    public void update(@RequestBody Agenda agenda) {
+    public void saveUpdate(@RequestBody Agenda agenda) {
         System.out.println("Mise à jour du calendrier");
         this.agendaService.save(agenda);
     }

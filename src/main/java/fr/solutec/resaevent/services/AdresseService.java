@@ -1,5 +1,6 @@
 package fr.solutec.resaevent.services;
 import fr.solutec.resaevent.entites.Adresse;
+import fr.solutec.resaevent.entites.Lieu;
 import fr.solutec.resaevent.repository.AdresseRepository;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -13,6 +14,7 @@ public class AdresseService {
      new AdresseDAO() creation de l'instance */
 
     private AdresseRepository adresseRepository;
+
     public AdresseService(AdresseRepository adresseRepository) {
         this.adresseRepository = adresseRepository;
     }
@@ -23,6 +25,15 @@ public class AdresseService {
     //READ
     public Optional<Adresse> findById(int id) {
         return this.adresseRepository.findById(id);
+    }
+    public Adresse read(int id){
+        Optional<Adresse> optionalAdresse = this.adresseRepository.findById(id);
+        if(optionalAdresse.isEmpty()){
+            //%S = PLACE HOLDER --> VARIABLE
+            String message = String.format("Aucune adresse n'a l'id %s", id);
+            throw new IllegalArgumentException(message);
+        }
+        return optionalAdresse.get();
     }
     //CREATE + UPDATE
     public Adresse save(Adresse adresse){
