@@ -46,6 +46,16 @@ public class ClientService {
 
     }
 
+    public boolean login(String mail, String password){
+        Optional<Client> optionalclientmail = this.clientRepository.findByEmail(mail);
+        if (optionalclientmail.isEmpty()){
+            String message = String.format ("Aucun Client n'a l'email %s", mail);
+            throw new IllegalArgumentException(message) ;
+        }
+        return this.clientDAO.login(mail, password);
+
+    }
+
 
 
     public Set<Client> search(Map<String, String> params){

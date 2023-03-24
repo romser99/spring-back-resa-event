@@ -38,6 +38,17 @@ public class ClientDAO {
 
     }
 
+    public boolean login(String mail, String password){
+        String sql = "SELECT * FROM CLIENT WHERE mail=? AND motdepasse= ";
+
+        Client client = jdbcTemplate.queryForObject(sql,Client.class, new Object[] { mail, password });
+        if (client.getEmail() != null || client.getEmail().equals("")) {
+            return false;
+        }
+        else return true ;
+
+    }
+
 
     public Set<Client> search(Map<String, String> params) {
         List<Client> clients = new ArrayList<>();

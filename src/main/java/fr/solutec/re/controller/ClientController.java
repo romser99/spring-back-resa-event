@@ -1,4 +1,6 @@
 package fr.solutec.re.controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Lieu;
@@ -9,7 +11,7 @@ import java.net.BindException;
 import java.util.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
+@CrossOrigin
 @RequestMapping(path = "client" , produces = APPLICATION_JSON_VALUE)
 @RestController
 public class ClientController {
@@ -44,7 +46,12 @@ public class ClientController {
 
     }
 
-
+    @GetMapping(path = "connection")
+    public @ResponseBody boolean login(@RequestParam(required = false) String mail,
+                                       @RequestParam(required = false) String password) {
+        boolean valid = this.clientService.login(mail, password) ;
+        return valid ;
+    }
 
     @GetMapping(path = "{id}")
     public Client findById(@PathVariable int id) {

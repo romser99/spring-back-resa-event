@@ -11,6 +11,7 @@ public class Personne {
     @Column(name = "mail")
     protected String email ;
     protected String telephone ;
+    @Column(name = "motdepasse")
     protected String password;
 
     public Personne( String prenom, String nom, String email, String telephone, String password) {
