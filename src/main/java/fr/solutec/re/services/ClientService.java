@@ -4,9 +4,15 @@ import fr.solutec.re.dao.ClientDAO;
 import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Gestionnaire;
 import fr.solutec.re.repository.ClientRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.net.BindException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.*;
 
 @Service
@@ -19,9 +25,25 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public void save(Client client) throws BindException {
+    public void save(Client client) throws BindException, NoSuchAlgorithmException {
         String Email = client.getEmail();
         String password = client.getPassword();
+        int strength = 10; // work factor of bcrypt
+        BCryptPasswordEncoder bCryptPasswordEncoder =
+                new BCryptPasswordEncoder(strength, new SecureRandom());
+        String encodedPassword = bCryptPasswordEncoder.encode(password);
+        client.setPassword(encodedPassword);
+
+        /*SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.update(salt);
+        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        String newpassword = new String(hashedPassword, StandardCharsets.UTF_8);
+        client.setPassword(newpassword);*/
+
+
         Optional<Client> optionalclient = this.clientRepository.findByEmail(Email);
         if (Email == null || password == null){
             String message = "Veuillez remplir tout les champs obligatoires indiqués par *";
@@ -48,11 +70,18 @@ public class ClientService {
 
     public boolean login(String mail, String password){
         Optional<Client> optionalclientmail = this.clientRepository.findByEmail(mail);
-        if (optionalclientmail.isEmpty()){
+        if (optionalclientmail.isEmpty() == true){
             String message = String.format ("Aucun Client n'a l'email %s", mail);
             throw new IllegalArgumentException(message) ;
         }
-        return this.clientDAO.login(mail, password);
+        Client client = optionalclientmail.get();
+        String Hashpassword = client.getPassword();
+        int strength = 10; // work factor of bcrypt
+        BCryptPasswordEncoder bCryptPasswordEncoder =
+                new BCryptPasswordEncoder(strength, new SecureRandom());
+        boolean check = bCryptPasswordEncoder.matches(password, client.getPassword());
+        return check;
+
 
     }
 

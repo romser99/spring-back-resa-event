@@ -8,6 +8,7 @@ import fr.solutec.re.services.ClientService;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.BindException;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -23,9 +24,8 @@ public class ClientController {
     }
 
 
-
-    @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void save(@RequestBody Client client) throws BindException {
+    @PostMapping(consumes = APPLICATION_JSON_VALUE, path = "inscription")
+    public void save(@RequestBody Client client) throws BindException, NoSuchAlgorithmException {
         this.clientService.save(client);
 
     }

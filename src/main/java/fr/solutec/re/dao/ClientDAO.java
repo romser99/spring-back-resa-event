@@ -4,8 +4,10 @@ import fr.solutec.re.entites.Client;
 import fr.solutec.re.entites.Lieu;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 
@@ -38,16 +40,20 @@ public class ClientDAO {
 
     }
 
-    public boolean login(String mail, String password){
-        String sql = "SELECT * FROM CLIENT WHERE mail=? AND motdepasse= ";
+    /*public boolean login(String mail, String password, String hashedpassword){
+        String sql = "SELECT * FROM CLIENT WHERE mail=?";
 
-        Client client = jdbcTemplate.queryForObject(sql,Client.class, new Object[] { mail, password });
-        if (client.getEmail() != null || client.getEmail().equals("")) {
+        Optional<Client> client =
+        if (client.getEmail() == null || client.getEmail().equals("")) {
             return false;
         }
-        else return true ;
+        int strength = 10; // work factor of bcrypt
+        BCryptPasswordEncoder bCryptPasswordEncoder =
+                new BCryptPasswordEncoder(strength, new SecureRandom());
+        boolean check = bCryptPasswordEncoder.matches(password, client.getPassword());
+        return check;
 
-    }
+    }*/
 
 
     public Set<Client> search(Map<String, String> params) {
