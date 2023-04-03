@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class EquipeService {
+public class    EquipeService {
     private EquipeDAO equipeDAO ;
     private EquipeRepository equipeRepository;
 

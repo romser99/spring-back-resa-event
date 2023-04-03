@@ -15,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.*;
 
+@CrossOrigin
 @Service
 public class ClientService {
     private ClientDAO clientDAO ;

@@ -23,7 +23,7 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-
+    @CrossOrigin
     @PostMapping(consumes = APPLICATION_JSON_VALUE, path = "inscription")
     public void save(@RequestBody Client client) throws BindException, NoSuchAlgorithmException {
         this.clientService.save(client);
@@ -46,12 +46,12 @@ public class ClientController {
 
     }
 
-    @GetMapping(path = "connection")
+    /*@GetMapping(path = "/auth/login")
     public @ResponseBody boolean login(@RequestParam(required = false) String mail,
                                        @RequestParam(required = false) String password) {
         boolean valid = this.clientService.login(mail, password) ;
         return valid ;
-    }
+    }*/
 
     @GetMapping(path = "{id}")
     public Client findById(@PathVariable int id) {
