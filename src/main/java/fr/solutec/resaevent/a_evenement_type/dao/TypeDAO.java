@@ -1,6 +1,5 @@
 package fr.solutec.resaevent.a_evenement_type.dao;
 
-import fr.solutec.re.entites.Type;
 import fr.solutec.resaevent.a_evenement_type.entites.Type;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;

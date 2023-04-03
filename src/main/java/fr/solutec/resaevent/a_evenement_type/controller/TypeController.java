@@ -1,7 +1,5 @@
 package fr.solutec.resaevent.a_evenement_type.controller;
 
-import fr.solutec.re.service.TypeService;
-import fr.solutec.re.entites.Type;
 import fr.solutec.resaevent.a_evenement_type.services.TypeService;
 import fr.solutec.resaevent.a_evenement_type.entites.Type;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +34,4 @@ public class TypeController {
     public void delete(@PathVariable int idtype) {
         typeService.delete(idtype);
     }
-
-
 }

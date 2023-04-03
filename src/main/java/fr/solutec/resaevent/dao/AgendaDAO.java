@@ -9,6 +9,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +29,10 @@ public class AgendaDAO {
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO AGENDA(date_debut, date_fin, horaire_debut, horaire_fin) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setDate(1, agenda.getDateDebut());
-            ps.setDate(2, agenda.getDateFin());
-            ps.setTime(3, agenda.getHoraireDebut());
-            ps.setTime(4, agenda.getHoraireFin());
+            ps.setObject(1, agenda.getDateDebut());
+            ps.setObject(2, agenda.getDateFin());
+            ps.setObject(3, agenda.getHoraireDebut());
+            ps.setObject(4, agenda.getHoraireFin());
 
             return ps;
         }, keyHolder);
@@ -51,10 +53,10 @@ public class AgendaDAO {
         for (Map<String, Object> item : items) {
             Agenda agenda = new Agenda();
             agenda.setId((Integer) item.get("id"));
-            agenda.setDateDebut((Date) item.get("date_debut"));
-            agenda.setDateFin((Date) item.get("date_fin"));
-            agenda.setHoraireDebut((Time) item.get("horaire_debut"));
-            agenda.setHoraireFin((Time) item.get("horaire_fin"));
+            agenda.setDateDebut((LocalDate) item.get("date_debut"));
+            agenda.setDateFin((LocalDate) item.get("date_fin"));
+            agenda.setHoraireDebut((LocalTime) item.get("horaire_debut"));
+            agenda.setHoraireFin((LocalTime) item.get("horaire_fin"));
             agendas.add(agenda);
         }
         return Set.copyOf(agendas);
@@ -67,10 +69,10 @@ public class AgendaDAO {
                     "UPDATE AGENDA SET " +
                             "DATE_DEBUT = ?, DATE_FIN = ?, HORAIRE_DEBUT = ?, HORAIRE_FIN = ? " +
                             "WHERE ID = ?");
-            ps.setDate(1, agenda.getDateDebut());
-            ps.setDate(2, agenda.getDateFin());
-            ps.setTime(3, agenda.getHoraireDebut());
-            ps.setTime(4, agenda.getHoraireFin());
+            ps.setObject(1, agenda.getDateDebut());
+            ps.setObject(2, agenda.getDateFin());
+            ps.setObject(3, agenda.getHoraireDebut());
+            ps.setObject(4, agenda.getHoraireFin());
             ps.setInt(5, agenda.getId());
 
             return ps;

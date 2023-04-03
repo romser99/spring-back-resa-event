@@ -31,7 +31,6 @@ public class ClientService {
 
         }
         this.clientRepository.save(client);
-
     }
     public Client findById(int id){
         Optional<Client> optionalclient = this.clientRepository.findById(id);

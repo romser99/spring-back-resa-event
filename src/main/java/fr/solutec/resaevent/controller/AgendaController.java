@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
+@CrossOrigin
 @RequestMapping(path = "agenda", produces = APPLICATION_JSON_VALUE)
 @RestController
 public class AgendaController {
@@ -28,11 +28,10 @@ public class AgendaController {
     }
     //READ
     @GetMapping (path = "{id}")
-    public @ResponseBody Agenda findById(@PathVariable int id) {
+    public Agenda findById(@PathVariable int id) {
         System.out.println("Lecture d'une adresse");
         return this.agendaService.findById(id);
     }
-
     //UPDATE
     @PutMapping
     public void saveUpdate(@RequestBody Agenda agenda) {

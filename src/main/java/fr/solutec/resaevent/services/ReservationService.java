@@ -1,23 +1,31 @@
 package fr.solutec.resaevent.services;
+
 import fr.solutec.resaevent.a_client.entites.Client;
 import fr.solutec.resaevent.a_client.services.ClientService;
+import fr.solutec.resaevent.a_evenement_type.services.EvenementService;
+import fr.solutec.resaevent.a_evenement_type.entites.Evenement;
 import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.entites.Reservation;
 import fr.solutec.resaevent.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 @Service
 public class ReservationService {
     private ReservationRepository reservationRepository;
     private AgendaService agendaService;
     private ClientService clientService;
+    //private EvenementService evenementService;
 
-    public ReservationService(ReservationRepository reservationRepository, AgendaService agendaService, ClientService clientService) {
+    public ReservationService(ReservationRepository reservationRepository,
+                              AgendaService agendaService,
+                              ClientService clientService,
+                              EvenementService evenementService) {
         this.reservationRepository = reservationRepository;
         this.agendaService = agendaService;
         this.clientService = clientService;
+        //this.evenementService = evenementService;
     }
+
     //SEARCH
     public Iterable<Reservation> findAll() {
         return this.reservationRepository.findAll();
@@ -31,9 +39,11 @@ public class ReservationService {
         //Qrcode qrcode = this.qrcodeService.findById(reservation.getQrcode().getId());
         //Qrcode qrcode = this.qrcodeService.findById(reservation.getQrcode().getId());
         //Place place = this.placeService.findById(reservation.getPlace().getId());
-        Client client = this.clientService.findById(reservation.getClient().getId());
+        //Evenement evenement = this.evenementService.create(reservation.getEvenement().getType().getNom());
+        //Client client = this.clientService.findById(reservation.getClient().getId());
         Agenda agenda = this.agendaService.findById(reservation.getAgenda().getId());
-        reservation.setClient(client);
+        //reservation.setEvenement(evenement);
+        //reservation.setClient(client);
         reservation.setAgenda(agenda);
         this.reservationRepository.save(reservation);
     }

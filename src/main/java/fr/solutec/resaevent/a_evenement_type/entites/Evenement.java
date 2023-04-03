@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table( name = "evenement")
+@Table(name = "evenement")
 public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +13,7 @@ public class Evenement {
     private String description;
 
     @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name ="id_type")
     private Type type;
 
     public Evenement() {

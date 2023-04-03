@@ -4,7 +4,7 @@ import fr.solutec.resaevent.services.ReservationService;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
+@CrossOrigin
 @RequestMapping(path = "reservation", produces = APPLICATION_JSON_VALUE)
 @RestController
 public class ReservationController {

@@ -1,5 +1,7 @@
 package fr.solutec.resaevent.entites;
 import fr.solutec.resaevent.a_client.entites.Client;
+import fr.solutec.resaevent.a_evenement_type.entites.Evenement;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,18 +11,23 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @OneToOne
+    @JoinColumn (name ="id_agenda")
     private Agenda agenda;
     @OneToOne
+    @JoinColumn (name ="id_client")
     private Client client;
+    @OneToOne
+    @JoinColumn (name ="id_evenement")
+    private Evenement evenement;
     public Reservation(){}
 
-    public Reservation(int id, Agenda agenda, Client client) {
+    public Reservation(int id, Agenda agenda, Client client, Evenement evenement) {
         this.id = id;
         this.agenda = agenda;
         this.client = client;
+        this.evenement = evenement;
     }
 
-    //private Evenement evenement;
     //Place place;
     //private Qrcode qrcode;
     //
@@ -46,5 +53,12 @@ public class Reservation {
     }
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
+    }
+
+    public Evenement getEvenement() {
+        return evenement;
+    }
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
     }
 }

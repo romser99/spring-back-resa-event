@@ -1,7 +1,6 @@
 package fr.solutec.resaevent.a_evenement_type.services;
 
-import fr.solutec.re.repositories.TypeRepository;
-import fr.solutec.re.entites.Type;
+
 import fr.solutec.resaevent.a_evenement_type.entites.Type;
 import fr.solutec.resaevent.a_evenement_type.repository.TypeRepository;
 import org.springframework.stereotype.Service;
@@ -33,8 +32,5 @@ public class TypeService {
         System.out.println("[Service] Suppression d'un type");
         this.typeRepository.deleteById(idtype);
     }
-
-
-
 
 }

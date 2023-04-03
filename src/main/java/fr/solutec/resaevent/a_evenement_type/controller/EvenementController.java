@@ -1,12 +1,8 @@
 package fr.solutec.resaevent.a_evenement_type.controller;
 
-import fr.solutec.re.entites.Type;
-import fr.solutec.re.service.EvenementService;
-import fr.solutec.re.entites.Evenement;
 import fr.solutec.resaevent.a_evenement_type.services.EvenementService;
 import fr.solutec.resaevent.a_evenement_type.entites.Evenement;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +27,10 @@ public class EvenementController {
 
     /* ///////////////////////////////////READ////////////////////////////////////// */
 
-    @GetMapping (path = "readall")
+   /* @GetMapping (path = "readall")
     public  @ResponseBody Iterable<Evenement> readAll() {
         return this.evenementService.readAll();
-    }
+    }*/
 
     @GetMapping
     public @ResponseBody List<Evenement> search(
@@ -70,5 +66,5 @@ public class EvenementController {
     public @ResponseBody void updatetype(String description, int idevt) {
         System.out.println("[controller] Update du type de l'évènement");
         this.evenementService.updatetype(description, idevt);
-    } */
+    }*/
 }

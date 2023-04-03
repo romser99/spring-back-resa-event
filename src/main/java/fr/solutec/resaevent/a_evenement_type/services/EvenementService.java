@@ -1,15 +1,9 @@
 package fr.solutec.resaevent.a_evenement_type.services;
-
-import fr.solutec.re.dao.EvenementDAO;
-import fr.solutec.re.entites.Type;
-import fr.solutec.re.repositories.EvenementRepository;
-import fr.solutec.re.entites.Evenement;
 import fr.solutec.resaevent.a_evenement_type.dao.EvenementDAO;
 import fr.solutec.resaevent.a_evenement_type.entites.Evenement;
 import fr.solutec.resaevent.a_evenement_type.entites.Type;
 import fr.solutec.resaevent.a_evenement_type.repository.EvenementRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Service
@@ -17,7 +11,6 @@ public class EvenementService {
 
     private TypeService typeService;
     private EvenementDAO evenementDAO;
-
     private EvenementRepository evenementRepository;
 
     public EvenementService(TypeService typeService, EvenementDAO evenementDAO, EvenementRepository evenementRepository) {
@@ -38,9 +31,9 @@ public class EvenementService {
 
     /* ////////////////////////////////////READ///////////////////////////////////// */
 
-    public Iterable<Evenement> readAll() {
+    /*public Iterable<Evenement> readAll() {
         return this.evenementRepository.findAll();
-    }
+    }*/
 
     public List<Evenement> search(Map<String, String> params) {
         Map<String, String> nparams = new HashMap<>();

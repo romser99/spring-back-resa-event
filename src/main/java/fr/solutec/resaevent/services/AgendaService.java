@@ -14,8 +14,6 @@ public class AgendaService {
     public Iterable<Agenda> findAll() {
         return this.agendaRepository.findAll();
     }
-
-
     //READ
     public Agenda findById(int id) {
         Optional<Agenda> optionalAgenda = this.agendaRepository.findById(id);
@@ -26,8 +24,6 @@ public class AgendaService {
         }
         return optionalAgenda.get();
     }
-
-
     //CREATE + UPDATE
     public Agenda save(Agenda agenda){
         return this.agendaRepository.save(agenda);

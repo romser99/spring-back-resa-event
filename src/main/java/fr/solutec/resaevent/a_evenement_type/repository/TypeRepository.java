@@ -1,6 +1,6 @@
 package fr.solutec.resaevent.a_evenement_type.repository;
 
-import fr.solutec.re.entites.Type;
+
 import fr.solutec.resaevent.a_evenement_type.entites.Type;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

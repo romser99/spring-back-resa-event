@@ -1,7 +1,5 @@
 package fr.solutec.resaevent.entites;
-
 import javax.persistence.*;
-
 @Entity
 @Table (name = "ADRESSE")
 public class Adresse {
