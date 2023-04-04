@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
+@CrossOrigin
 @RequestMapping(path = "evenement", produces = APPLICATION_JSON_VALUE)
 @RestController
 public class EvenementController {
@@ -20,6 +20,7 @@ public class EvenementController {
     }
 
     /* ///////////////////////////////////CREATE&UPDATE////////////////////////////////////// */
+    @CrossOrigin
     @PostMapping
     public void create(@RequestBody List<Evenement> events) {
         this.evenementService.create(events);
@@ -31,7 +32,7 @@ public class EvenementController {
     public  @ResponseBody Iterable<Evenement> readAll() {
         return this.evenementService.readAll();
     }*/
-
+    @CrossOrigin
     @GetMapping
     public @ResponseBody List<Evenement> search(
             @RequestParam(required = false) String nom,
@@ -43,6 +44,7 @@ public class EvenementController {
     }
 
     /* //////////////////////////////////DELETE/////////////////////////////////////// */
+    @CrossOrigin
     @DeleteMapping
     public void deleteparid(@RequestParam Set<Integer> id) {
         evenementService.deleteparid(id);

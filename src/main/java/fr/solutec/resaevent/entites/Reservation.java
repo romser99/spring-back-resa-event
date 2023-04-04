@@ -19,18 +19,18 @@ public class Reservation {
     @OneToOne
     @JoinColumn (name ="id_evenement")
     private Evenement evenement;
+    @OneToOne
+    @JoinColumn (name ="id_place")
+    private Place place;
     public Reservation(){}
 
-    public Reservation(int id, Agenda agenda, Client client, Evenement evenement) {
+    public Reservation(int id, Agenda agenda, Client client, Evenement evenement, Place place) {
         this.id = id;
         this.agenda = agenda;
         this.client = client;
         this.evenement = evenement;
+        this.place = place;
     }
-
-    //Place place;
-    //private Qrcode qrcode;
-    //
 
     public int getId() {
         return id;
@@ -60,5 +60,13 @@ public class Reservation {
     }
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
     }
 }

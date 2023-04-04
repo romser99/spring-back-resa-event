@@ -9,11 +9,12 @@ public class Lieu {
     private int id;
     private String nom;
     @OneToOne
+    @JoinColumn (name="id_adresse")
     private Adresse adresse;
 
     public Lieu(){}
 
-    public Lieu(int id, String nom, int idAdresse, Adresse adresse) {
+    public Lieu(int id, String nom, Adresse adresse) {
         this.id = id;
         this.nom = nom;
         this.adresse = adresse;

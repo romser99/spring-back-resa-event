@@ -16,7 +16,7 @@ public class Agenda {
     private LocalDate dateFin;
     private LocalTime horaireDebut;
     private LocalTime horaireFin;
-    @OneToOne
+    @ManyToOne (cascade = {CascadeType.MERGE})
     @JoinColumn (name ="id_evenement")
     private Evenement evenement;
     public Agenda(){}

@@ -8,7 +8,7 @@ public class Adresse {
     private int id;
     private int numero;
     private String rue;
-    @Column(name="CODE_POSTAL")
+    @Column(name="CODEPOSTAL")
     private int codePostal;
     private String ville;
     private String region;

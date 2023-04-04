@@ -12,7 +12,7 @@ public class Personne {
     @Column (name= "motdepasse")
     protected String password;
 
-    public Personne( String prenom, String nom, String email, String telephone, String password) {
+    public Personne(String prenom, String nom, String email, String telephone, String password) {
         this.prenom = prenom;
         this.nom = nom;
         this.email = email;

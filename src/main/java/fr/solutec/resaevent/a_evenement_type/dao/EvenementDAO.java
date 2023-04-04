@@ -80,7 +80,7 @@ public class EvenementDAO {
     public Set<Evenement> readparid(int idevt) {
         System.out.println("[DAO] Lecture d'évènements par id");
         List<Evenement> evenements = new ArrayList<>();
-        String QUERY = "SELECT * FROM EVENEMENT e JOIN TYPE t ON e.type_id = t.id WHERE e.id = ?";
+        String QUERY = "SELECT * FROM EVENEMENT e JOIN TYPE t ON e.id_type = t.id WHERE e.id = ?";
         List<Map<String, Object>> items = jdbcTemplate.queryForList(QUERY, idevt);
         for (Map<String, Object> item : items) {
             Evenement evenement = new Evenement();
@@ -105,7 +105,7 @@ public class EvenementDAO {
             int idtype = jdbcTemplate.queryForObject("SELECT id FROM TYPE WHERE nom = " + typeevt, null, Integer.class);
 
             List<Evenement> evenements = new ArrayList<>();
-            String QUERY = "SELECT * FROM EVENEMENT e JOIN TYPE t ON e.type_id = t.id WHERE t.id = ?" + idtype;
+            String QUERY = "SELECT * FROM EVENEMENT e JOIN TYPE t ON e.id_type = t.id WHERE t.id = ?" + idtype;
             List<Map<String, Object>> items = jdbcTemplate.queryForList(QUERY);
             for (Map<String, Object> item : items) {
                 Evenement evenement = new Evenement();
@@ -129,7 +129,7 @@ public class EvenementDAO {
 
     public List<Evenement> search(Map<String, String> params) {
         List<Evenement> evenements = new ArrayList<>();
-        String QUERY = "SELECT e.id AS e_id, e.nom AS e_nom, t.id AS t_id, t.nom AS t_nom, e.description AS e_description FROM EVENEMENT e JOIN TYPE t ON type_id = t.id";
+        String QUERY = "SELECT e.id AS e_id, e.nom AS e_nom, t.id AS t_id, t.nom AS t_nom, e.description AS e_description FROM EVENEMENT e JOIN TYPE t ON id_type = t.id";
         if (!params.isEmpty()) {
             List<String> keys = List.copyOf(params.keySet());
             for (int i = 0; i < keys.size(); i++) {

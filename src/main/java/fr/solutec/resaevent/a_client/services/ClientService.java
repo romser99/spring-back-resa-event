@@ -28,7 +28,6 @@ public class ClientService {
         if (optionalclient.isEmpty() == false) {
             String message = String.format ("Un compte est déja associé au mail %s", Email);
             throw new BindException(message) ;
-
         }
         this.clientRepository.save(client);
     }
