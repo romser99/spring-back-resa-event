@@ -1,6 +1,7 @@
 package fr.solutec.re.service;
 
 import fr.solutec.re.dao.EvenementDAO;
+import fr.solutec.re.entites.Salle;
 import fr.solutec.re.entites.Type;
 import fr.solutec.re.repositories.EvenementRepository;
 import fr.solutec.re.entites.Evenement;
@@ -12,17 +13,19 @@ import java.util.*;
 @Service
 public class EvenementService {
 
+    private SalleService salleService;
+
     private TypeService typeService;
     private EvenementDAO evenementDAO;
 
     private EvenementRepository evenementRepository;
 
-    public EvenementService(TypeService typeService, EvenementDAO evenementDAO, EvenementRepository evenementRepository) {
+    public EvenementService(SalleService salleService, TypeService typeService, EvenementDAO evenementDAO, EvenementRepository evenementRepository) {
+        this.salleService = salleService;
         this.typeService = typeService;
         this.evenementDAO = evenementDAO;
         this.evenementRepository = evenementRepository;
     }
-
     /* ///////////////////////////////////////CREATE&UPDATE/////////////////////////////// */
 
     public void create(Evenement evts) {

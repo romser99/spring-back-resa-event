@@ -41,11 +41,13 @@ public class EvenementController {
             //@RequestParam(required = false) Date date,
             //@RequestParam(required = false) int id,
             @RequestParam(required = false) String nom,
-            @RequestParam(required = false) String type){
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String salle){
         Map<String, Object> params = new HashMap<>();
         //params.put("e.id", id);
         params.put("e.nom", nom);
         params.put("t.nom", type);
+        params.put("s.nom", salle);
         /*if(date == null) {
             params.put("date", new Date());
         } */
