@@ -10,9 +10,9 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
-    private RoleEnum libelle ;
+    private String libelle ;
 
-    public Role(int id, RoleEnum libelle) {
+    public Role(int id, String libelle) {
         this.id = id;
         this.libelle = libelle;
     }
@@ -28,11 +28,11 @@ public class Role {
         this.id = id;
     }
 
-    public RoleEnum getLibelle() {
+    public String getLibelle() {
         return libelle;
     }
 
-    public void setLibelle(RoleEnum libelle) {
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
 }

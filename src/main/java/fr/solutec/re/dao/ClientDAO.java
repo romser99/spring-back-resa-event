@@ -23,7 +23,7 @@ public class ClientDAO {
 
     public void create (Client client){
         jdbcTemplate.update(
-                "INSERT INTO CLIENT (PRENOM, NOM, MAIL, TELEPHONE, PASSWORD) VALUES(?,?,?,?,?)",
+                "INSERT INTO CLIENT (PRENOM, NOM, MAIL, TELEPHONE, motdepasse) VALUES(?,?,?,?,?)",
                 client.getPrenom(),
                 client.getNom(),
                 client.getEmail(),

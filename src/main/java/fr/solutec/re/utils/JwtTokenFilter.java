@@ -1,6 +1,7 @@
 package fr.solutec.re.utils;
 
 import fr.solutec.re.entites.Client;
+import fr.solutec.re.entites.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -70,12 +71,14 @@ public class JwtTokenFilter  extends OncePerRequestFilter {
     }
 
     private UserDetails getUserDetails(String token) {
-        Client userDetails = new Client();
+        MyUserDetails myUserDetails = new MyUserDetails();
+        Client userDetails = myUserDetails.getUser();
         String[] jwtSubject = jwtUtil.getSubject(token).split(",");
 
         userDetails.setId(Integer.parseInt(jwtSubject[0]));
         userDetails.setEmail(jwtSubject[1]);
+        myUserDetails.setUser(userDetails);
 
-        return userDetails;
+        return myUserDetails;
     }
 }

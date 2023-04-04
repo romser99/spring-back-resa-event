@@ -2,15 +2,16 @@ package fr.solutec.re.services;
 
 import fr.solutec.re.dao.ClientDAO;
 import fr.solutec.re.entites.Client;
-import fr.solutec.re.entites.Gestionnaire;
+import fr.solutec.re.entites.Role;
+import fr.solutec.re.entites.UserRole;
 import fr.solutec.re.repository.ClientRepository;
+import fr.solutec.re.repository.RoleRepository;
+import fr.solutec.re.repository.UserRoleRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.net.BindException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.*;
@@ -20,10 +21,15 @@ import java.util.*;
 public class ClientService {
     private ClientDAO clientDAO ;
     private ClientRepository clientRepository ;
+    private RoleRepository roleRepository;
+    private UserRoleRepository userRoleRepository;
 
-    public ClientService(ClientDAO clientDAO, ClientRepository clientRepository) {
+    public ClientService(ClientDAO clientDAO, ClientRepository clientRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository) {
         this.clientDAO = clientDAO;
         this.clientRepository = clientRepository;
+        this.roleRepository = roleRepository;
+        this.userRoleRepository = userRoleRepository;
+
     }
 
     public void save(Client client) throws BindException, NoSuchAlgorithmException {
@@ -35,28 +41,25 @@ public class ClientService {
         String encodedPassword = bCryptPasswordEncoder.encode(password);
         client.setPassword(encodedPassword);
 
-        /*SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.update(salt);
-        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
-        String newpassword = new String(hashedPassword, StandardCharsets.UTF_8);
-        client.setPassword(newpassword);*/
-
-
         Optional<Client> optionalclient = this.clientRepository.findByEmail(Email);
         if (Email == null || password == null){
             String message = "Veuillez remplir tout les champs obligatoires indiqués par *";
             throw new IllegalStateException(message) ;
         }
-        if (optionalclient.isEmpty() == false) {
+        if (optionalclient.isPresent()) {
             String message = String.format ("Un compte est déja associé au mail %s", Email);
             throw new BindException(message) ;
 
         }
-        this.clientRepository.save(client);
-
+        this.clientDAO.create(client);
+        Optional<Client> newoptclient = clientRepository.findByEmail(Email);
+        Client newclient = newoptclient.get();
+        Optional<Role> newoptrole = roleRepository.findByLibelle("CLIENT");
+        Role newRole = newoptrole.get();
+        UserRole defaultrole = new UserRole();
+        defaultrole.setUser_id(newclient.getId());
+        defaultrole.setRole_id(newRole.getId());
+        this.userRoleRepository.save(defaultrole);
     }
 
     public Client findById(int id){

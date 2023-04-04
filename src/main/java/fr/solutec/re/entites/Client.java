@@ -6,27 +6,45 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
-public class Client extends Personne implements UserDetails {
+public class Client {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    protected String prenom ;
+    protected String nom ;
+    @Column(name = "mail")
+    protected String email ;
+    protected String telephone ;
+    @Column(name = "motdepasse")
+    protected String password;
+    private boolean enabled;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
-    public Client(String prenom, String nom, String email, String telephone, String password, int id) {
-        super(prenom, nom, email, telephone, password);
+    public Client(int id, String prenom, String nom, String email, String telephone, String password, boolean enabled, Set<Role> roles) {
         this.id = id;
-    }
-
-    public Client(int id) {
-        this.id = id;
+        this.prenom = prenom;
+        this.nom = nom;
+        this.email = email;
+        this.telephone = telephone;
+        this.password = password;
+        this.enabled = enabled;
+        this.roles = roles;
     }
 
     public Client() {
-
     }
 
     public int getId() {
@@ -37,33 +55,59 @@ public class Client extends Personne implements UserDetails {
         this.id = id;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public String getPrenom() {
+        return prenom;
     }
 
-    @Override
-    public String getUsername() {
-        return this.email;
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public String getNom() {
+        return nom;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public String getEmail() {
+        return email;
     }
 
-    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public boolean isEnabled() {
-        return true;
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

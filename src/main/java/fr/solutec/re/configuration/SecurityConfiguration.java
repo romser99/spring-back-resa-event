@@ -1,6 +1,7 @@
 package fr.solutec.re.configuration;
 
 import fr.solutec.re.repository.ClientRepository;
+import fr.solutec.re.repository.UserRepository;
 import fr.solutec.re.utils.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,6 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,22 +38,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @CrossOrigin
 @Configuration
 public class SecurityConfiguration  {
+   private JwtTokenFilter jwtTokenFilter;
 
-    @Autowired private ClientRepository userRepo;
-    @Autowired private JwtTokenFilter jwtTokenFilter;
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepo.findByEmail(username)
-                        .orElseThrow(
-                                () -> new UsernameNotFoundException("User " + username + " not found"));
-            }
-        };
+    public SecurityConfiguration(JwtTokenFilter jwtTokenFilter) {
+        this.jwtTokenFilter = jwtTokenFilter;
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
