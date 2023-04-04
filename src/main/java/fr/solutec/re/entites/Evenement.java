@@ -13,7 +13,8 @@ public class Evenement {
     private String nom;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    //@ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     private Type type;
 
     public Evenement() {

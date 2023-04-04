@@ -127,11 +127,11 @@ public class EvenementDAO {
         }
     }
 
-    public List<Evenement> search(Map<String, String> params) {
+    public List<Evenement> search(Map<String, Object> params) {
         List<Evenement> evenements = new ArrayList<>();
         String QUERY = "SELECT e.id AS e_id, e.nom AS e_nom, t.id AS t_id, t.nom AS t_nom, e.description AS e_description FROM EVENEMENT e JOIN TYPE t ON type_id = t.id";
         if (!params.isEmpty()) {
-            List<String> keys = List.copyOf(params.keySet());
+            List<String> keys = List.copyOf(params.keySet()); // join date
             for (int i = 0; i < keys.size(); i++) {
                 if (i == 0) {
                     QUERY += " WHERE " + keys.get(i) + " Like '%" + params.get(keys.get(i)) + "%'";
@@ -151,8 +151,6 @@ public class EvenementDAO {
             type.setId((int)item.get("t_id"));
             type.setNom((String)item.get("t_nom"));
             evenement.setType(type);
-
-            /// rajouter type
 
             evenements.add(evenement);
         }

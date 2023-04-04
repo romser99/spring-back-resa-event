@@ -25,12 +25,8 @@ public class EvenementService {
 
     /* ///////////////////////////////////////CREATE&UPDATE/////////////////////////////// */
 
-    public void create(Iterable<Evenement> evts) {
-        evts.forEach(evenement -> {
-            Type type = this.typeService.readByNom(evenement.getType().getNom());
-            evenement.setType(type);
-        });
-        this.evenementRepository.saveAll(evts);
+    public void create(Evenement evts) {
+        this.evenementRepository.save(evts);
     }
 
     /* ////////////////////////////////////READ///////////////////////////////////// */
@@ -39,14 +35,18 @@ public class EvenementService {
         return this.evenementRepository.findAll();
     }
 
-    public List<Evenement> search(Map<String, String> params) {
-        Map<String, String> nparams = new HashMap<>();
+    public List<Evenement> search(Map<String, Object> params) {
+        Map<String, Object> nparams = new HashMap<>();
         for (String key : params.keySet()) {
             if (params.get(key) != null) {
                 nparams.put(key, params.get(key));
             }
         }
         return this.evenementDAO.search(nparams);
+    }
+
+    public Optional<Evenement> findById(int id) {
+        return evenementRepository.findById(id);
     }
 
     /* public Iterable<Evenement> readparid(Iterable<Integer> idevt) {
