@@ -10,6 +10,7 @@ import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@CrossOrigin
 @RequestMapping(path = "adresse" , produces = APPLICATION_JSON_VALUE)
 @RestController
 public class AdresseController {

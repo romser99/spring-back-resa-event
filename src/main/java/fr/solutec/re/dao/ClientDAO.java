@@ -1,13 +1,10 @@
 package fr.solutec.re.dao;
 
 import fr.solutec.re.entites.Client;
-import fr.solutec.re.entites.Lieu;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import java.security.SecureRandom;
 import java.util.*;
 
 
@@ -23,12 +20,14 @@ public class ClientDAO {
 
     public void create (Client client){
         jdbcTemplate.update(
-                "INSERT INTO CLIENT (PRENOM, NOM, MAIL, TELEPHONE, motdepasse) VALUES(?,?,?,?,?)",
+                "INSERT INTO CLIENT (PRENOM, NOM, MAIL, TELEPHONE, motdepasse,enabled) VALUES(?,?,?,?,?,?)",
                 client.getPrenom(),
                 client.getNom(),
                 client.getEmail(),
                 client.getTelephone(),
-                client.getPassword()
+                client.getPassword(),
+                false
+
         );
 
     }

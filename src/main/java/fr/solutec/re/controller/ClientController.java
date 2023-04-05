@@ -3,7 +3,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import fr.solutec.re.entites.Client;
-import fr.solutec.re.entites.Lieu;
 import fr.solutec.re.services.ClientService;
 import org.springframework.web.bind.annotation.*;
 

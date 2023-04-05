@@ -2,13 +2,12 @@ package fr.solutec.re.services;
 
 import fr.solutec.re.dao.AdresseDAO;
 import fr.solutec.re.entites.Adresse;
-import fr.solutec.re.entites.Lieu;
 import fr.solutec.re.repository.AdresseRepository;
 import org.springframework.stereotype.Service;
 
 
 import java.util.Optional;
-import java.util.Set;
+
 @Service
 
 

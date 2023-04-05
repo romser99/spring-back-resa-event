@@ -10,7 +10,7 @@ public class Adresse {
     private int id;
     private int numero;
     private String rue;
-    @Column(name = "code_postal")
+    @Column(name = "codepostal")
     private int codePostal ;
     private String ville ;
     private String region ;

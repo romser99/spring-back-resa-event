@@ -1,7 +1,6 @@
 package fr.solutec.re.utils;
 
 import fr.solutec.re.entites.Client;
-import fr.solutec.re.entites.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,7 +44,7 @@ public class JwtTokenFilter  extends OncePerRequestFilter {
 
     private boolean hasAuthorizationBearer(HttpServletRequest request) {
         String header = request.getHeader("Authorization");
-        if (ObjectUtils.isEmpty(header) || !header.startsWith("Bearer")) {
+        if (ObjectUtils.isEmpty(header) || !header.startsWith("Bearer ")) {
             return false;
         }
 
@@ -71,14 +70,12 @@ public class JwtTokenFilter  extends OncePerRequestFilter {
     }
 
     private UserDetails getUserDetails(String token) {
-        MyUserDetails myUserDetails = new MyUserDetails();
-        Client userDetails = myUserDetails.getUser();
+        Client userDetails = new Client();
         String[] jwtSubject = jwtUtil.getSubject(token).split(",");
 
         userDetails.setId(Integer.parseInt(jwtSubject[0]));
         userDetails.setEmail(jwtSubject[1]);
-        myUserDetails.setUser(userDetails);
 
-        return myUserDetails;
+        return userDetails;
     }
 }

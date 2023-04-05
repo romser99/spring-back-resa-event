@@ -1,11 +1,6 @@
 package fr.solutec.re.controller;
 
-import fr.solutec.re.entites.Lieu;
-import fr.solutec.re.services.LieuService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
