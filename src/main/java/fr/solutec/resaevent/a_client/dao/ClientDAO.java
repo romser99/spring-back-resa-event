@@ -15,20 +15,23 @@ public class ClientDAO {
 
     public void create (Client client){
         jdbcTemplate.update(
-                "INSERT INTO CLIENT (PRENOM, NOM, MAIL, TELEPHONE, MOTDEPASSE) VALUES(?,?,?,?,?)",
+                "INSERT INTO CLIENT (PRENOM, NOM, MAIL, TELEPHONE, PASSWORD) VALUES(?,?,?,?,?)",
                 client.getPrenom(),
                 client.getNom(),
                 client.getEmail(),
                 client.getTelephone(),
                 client.getPassword()
         );
+
     }
 
     public Client read(int id) {
         String sql = "SELECT * FROM CLIENT WHERE id=?";
         Client client = jdbcTemplate.queryForObject(sql,Client.class, new Object[] { id });
         return client ;
+
     }
+
 
     public Set<Client> search(Map<String, String> params) {
         List<Client> clients = new ArrayList<>();

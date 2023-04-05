@@ -1,6 +1,4 @@
 package fr.solutec.resaevent.entites;
-import fr.solutec.resaevent.a_evenement_type.entites.Evenement;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,15 +17,19 @@ public class Agenda {
     @ManyToOne (cascade = {CascadeType.MERGE})
     @JoinColumn (name ="id_evenement")
     private Evenement evenement;
+    @JoinColumn(name = "id_salle")
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    private Salle salle;
     public Agenda(){}
 
-    public Agenda(int id, LocalDate dateDebut, LocalDate dateFin, LocalTime horaireDebut, LocalTime horaireFin, Evenement evenement) {
+    public Agenda(int id, LocalDate dateDebut, LocalDate dateFin, LocalTime horaireDebut, LocalTime horaireFin, Evenement evenement, Salle salle) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.evenement = evenement;
+        this.salle = salle;
     }
 
     public int getId() {
@@ -76,5 +78,13 @@ public class Agenda {
 
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
+    }
+
+    public Salle getSalle() {
+        return salle;
+    }
+
+    public void setSalle(Salle salle) {
+        this.salle = salle;
     }
 }

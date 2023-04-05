@@ -1,25 +1,21 @@
-package fr.solutec.resaevent.a_evenement_type.entites;
-
+package fr.solutec.resaevent.entites;
 import javax.persistence.*;
-
-
 @Entity
-@Table(name = "evenement")
+@Table( name = "evenement")
 public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
     private String description;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name ="id_type")
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "id_type")
     private Type type;
 
     public Evenement() {
     }
 
-    public Evenement(int id, String nom, String description, Type type) {
+    public Evenement(int id, String nom, String description, Type type, Salle salle) {
         this.id = id;
         this.nom = nom;
         this.description = description;
@@ -57,4 +53,5 @@ public class Evenement {
     public void setType(Type type) {
         this.type = type;
     }
+
 }

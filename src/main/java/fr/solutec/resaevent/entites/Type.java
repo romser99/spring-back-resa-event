@@ -1,5 +1,4 @@
-package fr.solutec.resaevent.a_evenement_type.entites;
-
+package fr.solutec.resaevent.entites;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,8 +18,6 @@ public class Type {
         this.id = id;
         this.nom = nom;
     }
-
-
 
     public int getId() {
         return id;

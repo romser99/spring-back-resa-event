@@ -1,8 +1,6 @@
 package fr.solutec.resaevent.services;
-import fr.solutec.resaevent.a_client.entites.Client;
 import fr.solutec.resaevent.a_client.services.ClientService;
-import fr.solutec.resaevent.a_evenement_type.services.EvenementService;
-import fr.solutec.resaevent.a_evenement_type.entites.Evenement;
+import fr.solutec.resaevent.entites.Evenement;
 import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.entites.Reservation;
 import fr.solutec.resaevent.repository.ReservationRepository;
@@ -35,8 +33,6 @@ public class ReservationService {
     }
     //CREATE + UPDATE
     public void save(Reservation reservation){
-        //Qrcode qrcode = this.qrcodeService.findById(reservation.getQrcode().getId());
-        //Qrcode qrcode = this.qrcodeService.findById(reservation.getQrcode().getId());
         //Place place = this.placeService.findById(reservation.getPlace().getId());
         /*Evenement evenement = this.evenementService.create(reservation.getEvenement().getId());
         Client client = this.clientService.findById(reservation.getClient().getId());
