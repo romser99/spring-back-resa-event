@@ -21,6 +21,19 @@ public class Role {
     public Role() {
     }
 
+    public Role(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public Role(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return this.libelle;
+    }
+
     public int getId() {
         return id;
     }

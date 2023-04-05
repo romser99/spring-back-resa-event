@@ -1,6 +1,8 @@
 package fr.solutec.re.utils;
 
 import fr.solutec.re.entites.Client;
+import fr.solutec.re.entites.Role;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -61,7 +63,7 @@ public class JwtTokenFilter  extends OncePerRequestFilter {
         UserDetails userDetails = getUserDetails(token);
 
         UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userDetails, null, null);
+                authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
         authentication.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request));
@@ -71,11 +73,23 @@ public class JwtTokenFilter  extends OncePerRequestFilter {
 
     private UserDetails getUserDetails(String token) {
         Client userDetails = new Client();
-        String[] jwtSubject = jwtUtil.getSubject(token).split(",");
+        Claims claims = jwtUtil.parseClaims(token);
+        String subject = (String) claims.get(Claims.SUBJECT);
+        String roles = (String) claims.get("roles");
+
+        roles = roles.replace("[", "").replace("]", "");
+        String[] roleNames = roles.split(",");
+
+        for (String aRoleName : roleNames) {
+            userDetails.addRole(new Role(aRoleName));
+        }
+
+        String[] jwtSubject = subject.split(",");
 
         userDetails.setId(Integer.parseInt(jwtSubject[0]));
         userDetails.setEmail(jwtSubject[1]);
 
         return userDetails;
+    }
     }
 }

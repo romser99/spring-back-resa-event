@@ -49,7 +49,7 @@ public class SecurityConfiguration {
         http.cors().and().authorizeRequests()
                 .antMatchers("/auth/login", "inscription")
                 .permitAll()
-                //.antMatchers("/adresse").hasAnyAuthority("ROLE_CLIENT")
+                .antMatchers("/adresse").hasAnyAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

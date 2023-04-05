@@ -117,7 +117,7 @@ public class Client implements UserDetails{
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+ role.getLibelle()));
+            authorities.add(new SimpleGrantedAuthority(role.getLibelle()));
         }
 
         return authorities;
@@ -141,6 +141,11 @@ public class Client implements UserDetails{
     @Override
     public boolean isCredentialsNonExpired() {
         return this.enabled;
+    }
+
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
 }
