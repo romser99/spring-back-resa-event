@@ -15,18 +15,18 @@ public class AdresseController {
     }
 
     //SEARCH
-    @GetMapping (path = "search")
+    @GetMapping
     public @ResponseBody Iterable<Adresse> findAll() {
         System.out.println("Lecture des adresses");
         return this.adresseService.findAll();
     }
     //READ
-    @GetMapping (path = "findbyid/{id}")
+    /*@GetMapping (path = "/{id}")
     public @ResponseBody Optional<Adresse> findById(@PathVariable int id) {
         System.out.println("Lecture d'une adresse");
         return this.adresseService.findById(id);
-    }
-    @GetMapping (path = "read/{id}")
+    }*/
+    @GetMapping (path = "/{id}")
     public @ResponseBody Adresse read(@PathVariable int id) {
         System.out.println("Lecture d'une adresse");
         return this.adresseService.read(id);

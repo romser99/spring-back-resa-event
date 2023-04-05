@@ -1,4 +1,6 @@
 package fr.solutec.resaevent.entites;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,9 @@ public class Place {
     private int id;
     private String categorie;
     private int prix;
+    @ManyToOne
+    @JoinColumn (name="id_salle")
+    @JsonBackReference
     private Salle salle;
 
     public Place() {

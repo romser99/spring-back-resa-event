@@ -1,4 +1,6 @@
 package fr.solutec.resaevent.entites;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -15,8 +17,8 @@ public class Salle {
     @OneToOne
     @JoinColumn (name="id_lieu")
     private Lieu lieu;
-    @OneToMany (cascade = {CascadeType.MERGE})
-    @JoinColumn (name="id_salle")
+    @OneToMany (cascade = {CascadeType.MERGE}, mappedBy = "salle")
+    @JsonManagedReference
     private List<Place> places;
     public Salle() {
     }
@@ -64,7 +66,6 @@ public class Salle {
     public List<Place> getPlaces() {
         return places;
     }
-
     public void setPlaces(List<Place> places) {
         this.places = places;
     }

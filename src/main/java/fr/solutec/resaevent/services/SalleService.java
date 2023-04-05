@@ -12,12 +12,12 @@ public class SalleService {
     }
 
     public void save(Salle salle) {
-        System.out.println("[service]Création d'un nouvel évènement");
+        System.out.println("[service] Création d'une nouvelle salle");
         this.salleRepository.save(salle);
     }
 
     public Iterable<Salle> findAll() {
-        System.out.println("[service]Lecture des évènements");
+        System.out.println("[service] Lecture des salles");
         return this.salleRepository.findAll();
     }
 }

@@ -1,5 +1,6 @@
 package fr.solutec.resaevent.services;
 import fr.solutec.resaevent.entites.Place;
+import fr.solutec.resaevent.entites.Salle;
 import fr.solutec.resaevent.repository.PlaceRepository;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class PlaceService {
     public Place save(Place place) {
         System.out.println("[service] Création d'une nouvelle place");
         return this.placeRepository.save(place);
+    }
+    public Iterable<Place> findAll() {
+        System.out.println("[service] Lecture des salles");
+        return this.placeRepository.findAll();
     }
 
     public Place read(int id) {

@@ -11,9 +11,6 @@ public class Lieu {
     @OneToOne
     @JoinColumn (name="id_adresse")
     private Adresse adresse;
-    @OneToMany
-    @JoinColumn (name="id_place")
-    private Place place;
 
     public Lieu(){}
 
