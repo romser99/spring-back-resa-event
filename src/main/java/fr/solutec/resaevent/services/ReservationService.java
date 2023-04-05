@@ -1,5 +1,5 @@
 package fr.solutec.resaevent.services;
-import fr.solutec.resaevent.a_client.services.ClientService;
+import fr.solutec.resaevent.services.ClientService;
 
 import fr.solutec.resaevent.entites.Reservation;
 import fr.solutec.resaevent.repository.ReservationRepository;

@@ -1,5 +1,5 @@
 package fr.solutec.resaevent.entites;
-import fr.solutec.resaevent.a_client.entites.Client;
+import fr.solutec.resaevent.entites.Client;
 
 import javax.persistence.*;
 

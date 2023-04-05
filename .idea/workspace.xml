@@ -4,59 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2248e2-8cf0-476a-bcb5-3f3e6fd4ed5f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/back-resa-events/back-resa-event" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/ResaEventsApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/controller/AdresseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/controller/ClientController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/controller/EquipeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/controller/GestionnaireController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/controller/LieuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/dao/AdresseDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/dao/ClientDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/dao/EquipeDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/dao/GestionnaireDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/dao/LieuDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/entites/Adresse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/entites/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/entites/Equipe.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/entites/Gestionnaire.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/entites/Lieu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/entites/Personne.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/entites/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/enums/RoleEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/services/AdresseService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/services/ClientService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/services/EquipeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/services/GestionnaireService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/services/LieuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/services/RoleService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/java/fr/solutec/re/utils/Data.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resa-events/src/test/java/fr/solutec/re/ResaEventsApplicationTests.java" beforeDir="false" />
-    </list>
+    <list default="true" id="02cec926-51af-46e0-87ff-85390e19c1fa" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/back-resa-events" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
-  <component name="ProjectId" id="2N0SSJJ7vSZMsA2EzKzpI2RAuQp" />
+  <component name="ProjectId" id="2O0S5IRGkQcbMbsPqq9vFw9Ep2T" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -65,17 +35,17 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/stagiaire/Documents/PROJETS DEV 3/spring resaevent/resa-events"
+    "last_opened_file_path": "C:/Users/stagiaire/Documents/DEV3/resa-events/spring-back-resa-event"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cd2248e2-8cf0-476a-bcb5-3f3e6fd4ed5f" name="Changes" comment="" />
-      <created>1678799504697</created>
+      <changelist id="02cec926-51af-46e0-87ff-85390e19c1fa" name="Changes" comment="" />
+      <created>1680695821761</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1678799504697</updated>
+      <updated>1680695821761</updated>
     </task>
     <servers />
   </component>
