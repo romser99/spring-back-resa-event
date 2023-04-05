@@ -10,6 +10,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -17,6 +18,8 @@
       </list>
     </option>
   </component>
+=======
+>>>>>>> 0ac2f610ffc0f5e4b4c10aa74b066867c72ab742
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -42,7 +45,11 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
     "last_opened_file_path": "C:/Users/dsi/Downloads/spring-back-resa-event-agenda-reservation/spring-back-resa-event-agenda-reservation"
+=======
+    "last_opened_file_path": "C:/Users/stagiaire/Documents/DEV3/resa-events/spring-back-resa-event"
+>>>>>>> 0ac2f610ffc0f5e4b4c10aa74b066867c72ab742
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

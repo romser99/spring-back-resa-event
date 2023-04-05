@@ -1,4 +1,5 @@
 package fr.solutec.resaevent.controller;
+<<<<<<< HEAD
 import com.google.zxing.WriterException;
 import fr.solutec.resaevent.entites.AuthResponse;
 import fr.solutec.resaevent.entites.Reservation;
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+=======
+import fr.solutec.resaevent.entites.Reservation;
+import fr.solutec.resaevent.services.ReservationService;
+import org.springframework.web.bind.annotation.*;
+>>>>>>> 0ac2f610ffc0f5e4b4c10aa74b066867c72ab742
 import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin
@@ -20,9 +26,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class ReservationController {
     private ReservationService reservationService;
+<<<<<<< HEAD
 
     @Autowired
     private EmailSenderService emailSenderService;
+=======
+>>>>>>> 0ac2f610ffc0f5e4b4c10aa74b066867c72ab742
     public ReservationController(ReservationService reservationService){
         this.reservationService = reservationService;
     }
@@ -34,6 +43,7 @@ public class ReservationController {
     }
     //CREATE
     @PostMapping (consumes = APPLICATION_JSON_VALUE)
+<<<<<<< HEAD
     public void save(@RequestBody Reservation reservation) throws IOException, WriterException, MessagingException {
         System.out.println("Création d'une nouvelle réservation");
         this.reservationService.save(reservation);
@@ -46,6 +56,11 @@ public class ReservationController {
                 "Invitation à un Event Exceptionnel"+"\n"+"Voici votre QRCode",
                 "Votre Réservation Eventiva",
                 "classpath**:\\src\\main\\resources\\QRC\\"+IdAsString+"-QRCODE.png");
+=======
+    public void save(@RequestBody Reservation reservation){
+        System.out.println("Création d'une nouvelle réservation");
+        this.reservationService.save(reservation);
+>>>>>>> 0ac2f610ffc0f5e4b4c10aa74b066867c72ab742
     }
     //READ
     @GetMapping (path = "{id}")

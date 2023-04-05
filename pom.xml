@@ -74,6 +74,7 @@
 			<artifactId>javaee-web-api</artifactId>
 			<version>8.0.1</version>
 		</dependency>
+<<<<<<< HEAD
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
@@ -114,6 +115,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+=======
+>>>>>>> 0ac2f610ffc0f5e4b4c10aa74b066867c72ab742
 	</dependencies>
 
 	<build>

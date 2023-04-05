@@ -3,7 +3,11 @@ package fr.solutec.resaevent.controller;
 import fr.solutec.resaevent.entites.AuthRequest;
 import fr.solutec.resaevent.entites.AuthResponse;
 import fr.solutec.resaevent.entites.Client;
+<<<<<<< HEAD
 import fr.solutec.resaevent.utils.JwtTokenUtil;
+=======
+import fr.solutec.re.utils.JwtTokenUtil;
+>>>>>>> 0ac2f610ffc0f5e4b4c10aa74b066867c72ab742
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
