@@ -1,5 +1,9 @@
 package fr.solutec.resaevent.entites;
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 @Entity
 @Table(name = "SALLE")
 public class Salle {
@@ -11,14 +15,18 @@ public class Salle {
     @OneToOne
     @JoinColumn (name="id_lieu")
     private Lieu lieu;
+    @OneToMany (cascade = {CascadeType.MERGE})
+    @JoinColumn (name="id_salle")
+    private List<Place> places;
     public Salle() {
     }
 
-    public Salle(int id, String nom, int capacite, Lieu lieu) {
+    public Salle(int id, String nom, int capacite, Lieu lieu, List<Place> places) {
         this.id = id;
         this.nom = nom;
         this.capacite = capacite;
         this.lieu = lieu;
+        this.places = places;
     }
 
     public int getId() {
@@ -51,5 +59,13 @@ public class Salle {
 
     public void setLieu(Lieu lieu) {
         this.lieu = lieu;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
     }
 }

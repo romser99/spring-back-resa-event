@@ -1,6 +1,4 @@
 package fr.solutec.resaevent.services;
-
-import java.util.Set;
 import fr.solutec.resaevent.entites.Salle;
 import fr.solutec.resaevent.repository.SalleRepository;
 import org.springframework.stereotype.Service;

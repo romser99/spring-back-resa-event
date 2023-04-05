@@ -9,14 +9,12 @@ public class Place {
     private int id;
     private String categorie;
     private int prix;
-    @OneToOne
-    @JoinColumn(name="id_salle")
     private Salle salle;
 
     public Place() {
     }
 
-    public Place(int id, String categorie, int quantite, int prix, Salle salle) {
+    public Place(int id, String categorie, int prix, Salle salle) {
         this.id = id;
         this.categorie = categorie;
         this.prix = prix;
