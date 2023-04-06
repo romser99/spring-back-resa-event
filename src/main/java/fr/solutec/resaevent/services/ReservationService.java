@@ -1,7 +1,7 @@
 package fr.solutec.resaevent.services;
 import com.google.zxing.WriterException;
-import fr.solutec.resaevent.a_client.entites.Client;
-import fr.solutec.resaevent.a_client.services.ClientService;
+import fr.solutec.resaevent.entites.Client;
+import fr.solutec.resaevent.services.ClientService;
 import fr.solutec.resaevent.entites.Agenda;
 import fr.solutec.resaevent.entites.Evenement;
 import fr.solutec.resaevent.entites.Place;
