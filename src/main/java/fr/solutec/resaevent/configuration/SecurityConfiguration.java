@@ -3,6 +3,7 @@ package fr.solutec.resaevent.configuration;
 import fr.solutec.resaevent.utils.JwtTokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.GET;
 
 import java.util.List;
 
@@ -48,6 +50,8 @@ public class SecurityConfiguration {
 
         http.cors().and().authorizeRequests()
                 .antMatchers("/auth/login", "/client/inscription")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/evenement","/agenda","/lieu","/place","/salle","/type")
                 .permitAll()
                 //.antMatchers("/adresse").hasAnyAuthority("CLIENT")
                 .anyRequest().authenticated()
