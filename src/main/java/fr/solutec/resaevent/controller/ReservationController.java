@@ -1,10 +1,14 @@
 package fr.solutec.resaevent.controller;
 import com.google.zxing.WriterException;
+import fr.solutec.resaevent.entites.Client;
 import fr.solutec.resaevent.entites.Reservation;
+import fr.solutec.resaevent.repository.ClientRepository;
 import fr.solutec.resaevent.services.ReservationService;
 import fr.solutec.resaevent.utils.EmailSenderService;
 import fr.solutec.resaevent.utils.QRCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -16,6 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class ReservationController {
     private ReservationService reservationService;
+    private ClientRepository clientRepository;
 
     public ReservationController(ReservationService reservationService){
         this.reservationService = reservationService;
@@ -29,6 +34,11 @@ public class ReservationController {
     //CREATE
     @PostMapping (consumes = APPLICATION_JSON_VALUE)
     public void save(@RequestBody Reservation reservation) throws IOException, WriterException, MessagingException {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String currentMail = ((UserDetails)principal).getUsername();
+        Optional<Client> optclient = this.clientRepository.findByEmail(currentMail);
+        Client client = optclient.get();
+        reservation.setClient(client);
         System.out.println("Création d'une nouvelle réservation");
         this.reservationService.save(reservation);
     }

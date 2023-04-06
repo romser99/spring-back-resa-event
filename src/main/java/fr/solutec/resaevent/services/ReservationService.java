@@ -46,7 +46,6 @@ public class ReservationService {
     }
     //CREATE + UPDATE
     public void save(Reservation reservation) throws MessagingException, IOException, WriterException {
-        //Place place = this.placeService.findById(reservation.getPlace().getId());
         Evenement evenement = this.evenementService.findById(reservation.getEvenement().getId()).get();
         Client client = this.clientService.findById(reservation.getClient().getId());
         Place place = this.placeService.read(reservation.getPlace().getId());
