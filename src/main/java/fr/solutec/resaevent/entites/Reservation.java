@@ -12,7 +12,7 @@ public class Reservation {
     @OneToOne
     @JoinColumn (name ="id_agenda")
     private Agenda agenda;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn (name ="id_client")
     private Client client;
     @OneToOne

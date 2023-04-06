@@ -15,10 +15,15 @@ public class AgendaController {
     }
 
     //SEARCH
+    @CrossOrigin
     @GetMapping
-    public @ResponseBody Iterable<Agenda> findAll() {
-        System.out.println("Lecture du calendrier");
-        return this.agendaService.findAll();
+    public @ResponseBody Iterable<Agenda> findByEvenementId(@RequestParam (required = false) Integer idevt ) {
+        if (idevt == null) {
+            return this.agendaService.findAll();
+        }
+        else {
+            return this.agendaService.findByEvenementId(idevt);
+        }
     }
     //CREATE
     @PostMapping (consumes = APPLICATION_JSON_VALUE)

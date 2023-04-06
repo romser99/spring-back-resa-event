@@ -33,4 +33,7 @@ public class AgendaService {
         this.agendaRepository.deleteById(id);
         return null;
     }
+    public Iterable<Agenda> findByEvenementId(Integer idevt) {
+        return this.agendaRepository.findByEvenementId(idevt);
+    }
 }

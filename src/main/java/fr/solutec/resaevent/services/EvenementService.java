@@ -63,5 +63,6 @@ public class EvenementService {
             this.evenementRepository.deleteAllById(ids);
         }
     }
+
 }
 
